@@ -3,8 +3,9 @@
 Live dashboard (open in any browser, no login):
 **https://yash1402r.github.io/armor-launch-timelines/**
 
-- **Overview** tab — every product's total work span (start → warehouse), buffer, and launch flag on one calendar, with a TODAY line.
-- **One tab per product** — its full week-based timeline with a **Team** filter (All / Product team / Design team) and a **Week** selector (All weeks, or any single week).
+- **Full view** — a waterfall Gantt: every task is its own labelled block, one colour per product, on a shared Jun 2026 → Feb 2027 calendar, with warehouse/launch/slack per product, a TODAY line, and launch flags.
+- **Week by week** — combine a week + a task type to see exactly what's on the desk (hands-on vs follow-up).
+- Click any product name to open its full week-based timeline (Team filter: All / Product / Design · Week selector).
 
 Each product page is also directly openable:
 
