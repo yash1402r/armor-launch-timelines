@@ -76,25 +76,34 @@
   .empty{color:var(--dim);font-size:12.5px;padding:20px 0;}
   .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11px;color:var(--mut);margin-top:10px;align-items:center;}
   .legend .sw{display:inline-block;width:18px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
+  .controls{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:12px;padding-bottom:6px;}
+  .controls .weeknav{margin-bottom:8px;}
+  .wpill .dotc{margin-right:5px;}
 </style></head><body>
 <header>
   <div>
     <h1>Armor — Launch Timelines</h1>
-    <div class="sub">9 products from the Products table · week-based launch plans · Jun 2026 → Feb 2027 · click a product name to open its full timeline (team + week filters)</div>
+    <div class="sub">9 products from the Products table · week-based launch plans · Jun 2026 → Feb 2027 · click a product name to open its full timeline</div>
   </div>
   <div class="fitline" id="fitline"></div>
 </header>
-<section>
-  <div class="sec-h"><h2>Full view · every task tagged</h2><span class="hint">striped = getting models / BIS (Phase 1) · solid = design → launch · faded = already past · ▎ at row end = launch</span></div>
-  <div class="gwrap" id="gwrap"></div>
-  <div class="legend" id="legend"></div>
-</section>
-<section>
-  <div class="sec-h"><h2>Week by week — what's on the desk</h2><span class="hint">combine a week + a task type, or pick "All weeks" · HANDS-ON = your team acts · FOLLOW-UP = vendor/transit · DUE = ends this week</span></div>
+<section class="controls">
+  <div class="navlbl lbl">Product</div>
+  <div class="weeknav" id="prodnav"></div>
+  <div class="navlbl lbl">Team</div>
+  <div class="weeknav" id="teamnav"></div>
   <div class="navlbl lbl">Week</div>
   <div class="weeknav" id="weeknav"></div>
   <div class="navlbl lbl">Task type</div>
   <div class="weeknav" id="tasknav"></div>
+</section>
+<section style="padding-top:6px">
+  <div class="sec-h"><h2>Full view · every task tagged</h2><span class="hint">filters above apply here · striped = getting models / BIS (Phase 1) · faded = past · ▎ at row end = launch</span></div>
+  <div class="gwrap" id="gwrap"></div>
+  <div class="legend" id="legend"></div>
+</section>
+<section>
+  <div class="sec-h"><h2>On the desk — filtered view</h2><span class="hint">the filters above apply here too · HANDS-ON = your team acts · FOLLOW-UP = vendor/transit · DUE = ends this week</span></div>
   <div class="wksum" id="wksum"></div>
   <div class="wkgrid" id="wkgrid"></div>
 </section>
@@ -138,7 +147,7 @@ DATA.forEach(p=>{
   const col=COLORS[p.product];
   const mon=s=>{const d=new Date(s);return d.toLocaleDateString("en-GB",{month:"short"})+(d.getFullYear()!==2026?" '"+String(d.getFullYear()).slice(2):"");};
   const launchMon=p.launch.split(" ")[0].slice(0,3)+(p.launch.split(" ")[1]!=="2026"?" '"+p.launch.split(" ")[1].slice(2):"");
-  html+=`<div class="grow"><div class="gname" style="height:${h}px">
+  html+=`<div class="grow" data-product="${p.product}"><div class="gname" style="height:${h}px">
     <div class="nm"><span class="dotc" style="background:${col}"></span><a href="${p.url}" target="_blank" rel="noopener">${p.product}</a></div>
     <div class="meta"><span class="mk">Warehouse</span><span class="num">${mon(p.completion)}</span></div>
     <div class="meta"><span class="mk">Launch</span><span class="num">${launchMon}</span><span class="chip ${p.status}">+${p.slack}w</span></div>
@@ -154,10 +163,10 @@ DATA.forEach(p=>{
     const top=BT+t.lane*LH;
     const needW=t.n.length*5.7+14;
     const inside=w>=needW;
-    html+=`<div class="bar${t.ph==="Phase 1"?" ph1":""}${past?" past":""}" data-n="${t.n}" style="left:${l}px;width:${w}px;top:${top}px;background:${col}" data-tip="${t.n}|${fmt(t.s)} → ${fmt(t.e)} · ${p.product}">${inside?t.n:""}</div>`;
+    html+=`<div class="bar${t.ph==="Phase 1"?" ph1":""}${past?" past":""}" data-n="${t.n}" data-s="${t.s}" data-e="${t.e}" data-product="${p.product}" style="left:${l}px;width:${w}px;top:${top}px;background:${col}" data-tip="${t.n}|${fmt(t.s)} → ${fmt(t.e)} · ${p.product}">${inside?t.n:""}</div>`;
     if(!inside){const fitsRight=l+w+6+needW<=nWeeks*PXW;
-      html+=fitsRight?`<div class="blab${past?" past":""}" data-n="${t.n}" style="left:${l+w+6}px;top:${top}px;color:${col}">${t.n}</div>`
-        :`<div class="blab${past?" past":""}" data-n="${t.n}" style="right:${nWeeks*PXW-l+6}px;top:${top}px;color:${col}">${t.n}</div>`;}
+      html+=fitsRight?`<div class="blab${past?" past":""}" data-n="${t.n}" data-s="${t.s}" data-e="${t.e}" data-product="${p.product}" style="left:${l+w+6}px;top:${top}px;color:${col}">${t.n}</div>`
+        :`<div class="blab${past?" past":""}" data-n="${t.n}" data-s="${t.s}" data-e="${t.e}" data-product="${p.product}" style="right:${nWeeks*PXW-l+6}px;top:${top}px;color:${col}">${t.n}</div>`;}
   });
   html+=`</div></div>`;
 });
@@ -176,7 +185,7 @@ const weeks=[];
 for(let w=0;w<nWeeks;w++){const ws=new Date(T0.getTime()+w*7*DAY),we=new Date(ws.getTime()+7*DAY);const items=[];
  DATA.forEach(p=>p.tasks.forEach(t=>{if(new Date(t.s)<we&&new Date(t.e)>ws)items.push({p,t,due:new Date(t.e)<=we});}));
  weeks.push({ws,we,items});}
-const nav=document.getElementById("weeknav"),tnav=document.getElementById("tasknav"),grid=document.getElementById("wkgrid"),sum=document.getElementById("wksum");
+const prodnav=document.getElementById("prodnav"),teamnav=document.getElementById("teamnav"),nav=document.getElementById("weeknav"),tnav=document.getElementById("tasknav"),grid=document.getElementById("wkgrid"),sum=document.getElementById("wksum");
 const curIdx=weeks.findIndex(w=>TODAY>=w.ws&&TODAY<w.we);
 const FAMILIES={
  sourcing:{label:"Sourcing & Getting models",names:["Getting models","Finalise assembler"]},
@@ -187,42 +196,41 @@ const FAMILIES={
  prod:{label:"Production & Software",names:["Final production","Software","Assembly – India"]},
  ship:{label:"Shipping & Delivery",names:["Intl shipping (sea)","Customs & local","Customs + WPC clear","To warehouse"]}};
 const FAM_OF={};Object.entries(FAMILIES).forEach(([k,f])=>f.names.forEach(n=>FAM_OF[n]=k));
-let selWeek=Math.max(curIdx,0),selFam=null;
-const match=n=>!selFam||FAM_OF[n]===selFam;
-nav.innerHTML=`<button class="wpill" data-i="-1">All weeks<span class="cnt num"></span></button>`+
- weeks.map((w,i)=>`<button class="wpill" data-i="${i}">${fmt(w.ws)}${i===curIdx?" · this week":""}<span class="cnt num"></span></button>`).join("");
-tnav.innerHTML=`<button class="wpill">All tasks</button>`+
- Object.entries(FAMILIES).map(([k,f])=>`<button class="wpill" data-f="${k}">${f.label}<span class="cnt num"></span></button>`).join("");
+const DESIGN=new Set(["Product design","Product prototyping","Prototype feedback","Packaging design","Packaging prototyping","Packaging feedback"]);
+const teamOf=n=>DESIGN.has(n)?"design":"product";
+let selProduct=null,selTeam=null,selFam=null,selWeek=Math.max(curIdx,0);
+const matchTF=n=>(!selFam||FAM_OF[n]===selFam)&&(!selTeam||teamOf(n)===selTeam);
+const inWeek=(s,e)=>{if(selWeek<0)return true;const wk=weeks[selWeek];return new Date(s)<wk.we&&new Date(e)>wk.ws;};
+prodnav.innerHTML=`<button class="wpill" data-p="">All products</button>`+DATA.map(p=>`<button class="wpill" data-p="${p.product}"><span class="dotc" style="background:${COLORS[p.product]}"></span>${p.product}</button>`).join("");
+teamnav.innerHTML=`<button class="wpill" data-tm="">All teams</button><button class="wpill" data-tm="product">Product team</button><button class="wpill" data-tm="design">Design team</button>`;
+nav.innerHTML=`<button class="wpill" data-i="-1">All weeks<span class="cnt num"></span></button>`+weeks.map((w,i)=>`<button class="wpill" data-i="${i}">${fmt(w.ws)}${i===curIdx?" · now":""}<span class="cnt num"></span></button>`).join("");
+tnav.innerHTML=`<button class="wpill" data-f="">All tasks</button>`+Object.entries(FAMILIES).map(([k,f])=>`<button class="wpill" data-f="${k}">${f.label}<span class="cnt num"></span></button>`).join("");
+prodnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selProduct=b.dataset.p||null;render();}});
+teamnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selTeam=b.dataset.tm||null;render();}});
 nav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selWeek=+b.dataset.i;render();}});
 tnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selFam=b.dataset.f||null;render();}});
 function render(){
+  document.querySelectorAll(".grow").forEach(r=>{r.style.display=(!selProduct||r.dataset.product===selProduct)?"":"none";});
+  gw.querySelectorAll(".bar,.blab").forEach(el=>{const vis=(!selProduct||el.dataset.product===selProduct)&&matchTF(el.dataset.n)&&inWeek(el.dataset.s,el.dataset.e);el.classList.toggle("dimmed",!vis);});
+  prodnav.querySelectorAll(".wpill").forEach(el=>el.classList.toggle("active",(el.dataset.p||null)===selProduct));
+  teamnav.querySelectorAll(".wpill").forEach(el=>el.classList.toggle("active",(el.dataset.tm||null)===selTeam));
   nav.querySelectorAll(".wpill").forEach(el=>{const i=+el.dataset.i;el.classList.toggle("active",i===selWeek);
-    const c=i<0?DATA.reduce((a,p)=>a+p.tasks.filter(t=>match(t.n)).length,0):weeks[i].items.filter(x=>match(x.t.n)).length;
+    const c=i<0?DATA.reduce((a,p)=>a+p.tasks.filter(t=>(!selProduct||p.product===selProduct)&&matchTF(t.n)).length,0):weeks[i].items.filter(x=>(!selProduct||x.p.product===selProduct)&&matchTF(x.t.n)).length;
     el.querySelector(".cnt").textContent=c||"—";el.style.opacity=c?"":".45";});
   tnav.querySelectorAll(".wpill").forEach(el=>{const f=el.dataset.f||null;el.classList.toggle("active",f===selFam);
-    if(f){const c=selWeek>=0?weeks[selWeek].items.filter(x=>FAM_OF[x.t.n]===f).length:DATA.reduce((a,p)=>a+p.tasks.filter(t=>FAM_OF[t.n]===f).length,0);
+    if(f){const c=selWeek>=0?weeks[selWeek].items.filter(x=>(!selProduct||x.p.product===selProduct)&&(!selTeam||teamOf(x.t.n)===selTeam)&&FAM_OF[x.t.n]===f).length:DATA.reduce((a,p)=>a+p.tasks.filter(t=>(!selProduct||p.product===selProduct)&&(!selTeam||teamOf(t.n)===selTeam)&&FAM_OF[t.n]===f).length,0);
       el.querySelector(".cnt").textContent=c||"—";el.style.opacity=c?"":".45";}});
-  gw.querySelectorAll(".bar,.blab").forEach(el=>el.classList.toggle("dimmed",!!selFam&&FAM_OF[el.dataset.n]!==selFam));
   let items,scope;
-  if(selWeek>=0){const wk=weeks[selWeek];items=wk.items.filter(x=>match(x.t.n));scope=`week of <b class="num">${fmt(wk.ws)}</b>`;}
-  else{items=[];DATA.forEach(p=>p.tasks.forEach(t=>{if(match(t.n))items.push({p,t,due:false});}));scope="the <b>full timeline</b>";}
-  const famTxt=selFam?` · showing only <b>${FAMILIES[selFam].label}</b>`:"";
-  if(!items.length){sum.innerHTML=`Nothing in ${scope}${famTxt}.`;grid.innerHTML=`<div class="empty">No matching tasks — pick another week or task type.</div>`;return;}
-  const hands=items.filter(x=>HANDS_ON.has(x.t.n)).length;
-  const prods=new Set(items.map(x=>x.p.product));
-  sum.innerHTML=`<b>${prods.size} products</b> · <b>${items.length} tasks</b> (${hands} hands-on, ${items.length-hands} follow-up) in ${scope}${famTxt}. `+
-    (selWeek>=0?(hands>8?`<b style="color:var(--bad)">Overloaded week</b> — hands-on above ~8 means things slip.`:
-                 hands>=5?`<b style="color:var(--tight)">Heavy but doable</b> if follow-ups are batched.`:`Comfortable load.`):"");
-  const byP=new Map();
-  items.forEach(x=>{if(!byP.has(x.p.product))byP.set(x.p.product,{p:x.p,list:[]});byP.get(x.p.product).list.push(x);});
+  if(selWeek>=0){const wk=weeks[selWeek];items=wk.items.filter(x=>(!selProduct||x.p.product===selProduct)&&matchTF(x.t.n));scope=`week of <b class="num">${fmt(wk.ws)}</b>`;}
+  else{items=[];DATA.forEach(p=>p.tasks.forEach(t=>{if((!selProduct||p.product===selProduct)&&matchTF(t.n))items.push({p,t,due:false});}));scope="the <b>full timeline</b>";}
+  const bits=[];if(selProduct)bits.push(`<b>${selProduct}</b>`);if(selTeam)bits.push(`<b>${selTeam} team</b>`);if(selFam)bits.push(`<b>${FAMILIES[selFam].label}</b>`);
+  const famTxt=bits.length?" · "+bits.join(" · "):"";
+  if(!items.length){sum.innerHTML=`Nothing in ${scope}${famTxt}.`;grid.innerHTML=`<div class="empty">No matching tasks — loosen a filter.</div>`;return;}
+  const hands=items.filter(x=>HANDS_ON.has(x.t.n)).length;const prods=new Set(items.map(x=>x.p.product));
+  sum.innerHTML=`<b>${prods.size} product${prods.size>1?"s":""}</b> · <b>${items.length} tasks</b> (${hands} hands-on, ${items.length-hands} follow-up) in ${scope}${famTxt}. `+(selWeek>=0?(hands>8?`<b style="color:var(--bad)">Overloaded week.</b>`:hands>=5?`<b style="color:var(--tight)">Heavy but doable.</b>`:`Comfortable load.`):"");
+  const byP=new Map();items.forEach(x=>{if(!byP.has(x.p.product))byP.set(x.p.product,{p:x.p,list:[]});byP.get(x.p.product).list.push(x);});
   grid.innerHTML=[...byP.values()].map(({p,list})=>{list.sort((a,b)=>new Date(a.t.s)-new Date(b.t.s));
-    return `<div class="pcard" style="border-top-color:${COLORS[p.product]}">
-      <h3><span>${p.product}</span><span class="chip ${p.status}">+${p.slack}w</span></h3>
-      ${list.map(x=>`<div class="titem">
-        <span class="tag ${x.due?"due":HANDS_ON.has(x.t.n)?"act":"wait"}">${x.due?"due":HANDS_ON.has(x.t.n)?"hands-on":"follow-up"}</span>
-        <span class="tn">${x.t.n}</span><span class="td num">${fmt(x.t.s)}–${fmt(x.t.e)}</span>
-      </div>`).join("")}
-    </div>`;}).join("");
+    return `<div class="pcard" style="border-top-color:${COLORS[p.product]}"><h3><span>${p.product}</span><span class="chip ${p.status}">+${p.slack}w</span></h3>${list.map(x=>`<div class="titem"><span class="tag ${x.due?"due":HANDS_ON.has(x.t.n)?"act":"wait"}">${x.due?"due":HANDS_ON.has(x.t.n)?"hands-on":"follow-up"}</span><span class="tn">${x.t.n}</span><span class="td num">${fmt(x.t.s)}–${fmt(x.t.e)}</span></div>`).join("")}</div>`;}).join("");
 }
 render();
 
