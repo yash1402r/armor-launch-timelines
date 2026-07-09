@@ -3,9 +3,10 @@
 Live dashboard (open in any browser, no login):
 **https://yash1402r.github.io/armor-launch-timelines/**
 
+- **Filter bar on top** — combine **Product** (isolate one), **Team** (All / Product / Design), **Week**, and **Task type**. Filters apply to both the waterfall and the digest.
 - **Full view** — a waterfall Gantt: every task is its own labelled block, one colour per product, on a shared Jun 2026 → Feb 2027 calendar, with warehouse/launch/slack per product, a TODAY line, and launch flags.
-- **Week by week** — combine a week + a task type to see exactly what's on the desk (hands-on vs follow-up).
-- Click any product name to open its full week-based timeline (Team filter: All / Product / Design · Week selector).
+- **On the desk** — the filtered task list, tagged hands-on / follow-up / due, with a weekly load read.
+- Click any product name to open its full week-based timeline page.
 
 Each product page is also directly openable:
 
