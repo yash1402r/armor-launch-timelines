@@ -198,7 +198,7 @@ const FAMILIES={
 const FAM_OF={};Object.entries(FAMILIES).forEach(([k,f])=>f.names.forEach(n=>FAM_OF[n]=k));
 const DESIGN=new Set(["Product design","Product prototyping","Prototype feedback","Packaging design","Packaging prototyping","Packaging feedback"]);
 const teamOf=n=>DESIGN.has(n)?"design":"product";
-let selProduct=null,selTeam=null,selFam=null,selWeek=Math.max(curIdx,0);
+let selProduct=null,selTeam=null,selFam=null,selWeek=-1;
 const matchTF=n=>(!selFam||FAM_OF[n]===selFam)&&(!selTeam||teamOf(n)===selTeam);
 const inWeek=(s,e)=>{if(selWeek<0)return true;const wk=weeks[selWeek];return new Date(s)<wk.we&&new Date(e)>wk.ws;};
 prodnav.innerHTML=`<button class="wpill" data-p="">All products</button>`+DATA.map(p=>`<button class="wpill" data-p="${p.product}"><span class="dotc" style="background:${COLORS[p.product]}"></span>${p.product}</button>`).join("");
