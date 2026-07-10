@@ -12,11 +12,11 @@ Each product page is also directly openable:
 
 | Product | Build | Launch | Page |
 |---|---|---|---|
-| Adapter | SKD | 4 Dec 2026 | adapter.html |
-| Cables | CBU | 1 Dec 2026 | cables.html |
+| Adapter | SKD | October 2026 (17 Oct) | adapter.html |
+| Cables | CBU | October 2026 (15 Oct) | cables.html |
 | Wireless Keyboard | SKD | 18 Dec 2026 | wireless-keyboard.html |
 | Wireless Mouse | CBU | 7 Dec 2026 | wireless-mouse.html |
-| Wireless Controller | SKD | 18 Dec 2026 | controller.html |
+| Wireless Controller | CBU | October 2026 (17 Oct) | controller.html |
 | USB-C Dock | CBU | 1 Jan 2027 | usb-c-doc.html |
 | USB-C Microphone | CBU | 1 Jan 2027 | usb-c-microphone.html |
 | Webcam | SKD | 8 Jan 2027 | webcam.html |

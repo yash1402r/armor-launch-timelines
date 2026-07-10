@@ -35,9 +35,9 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 .info{font-size:12.5px;color:var(--ts);margin:8px 0 14px;line-height:1.55;min-height:36px}
 .info b{color:var(--tp);font-weight:600}
 .wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--s2)}
-.gantt{display:flex;min-width:972px;position:relative}
+.gantt{display:flex;min-width:734px;position:relative}
 .labels{position:sticky;left:0;z-index:3;background:var(--s1);flex:0 0 190px;border-right:1px solid var(--bd)}
-.tracks{position:relative;flex:0 0 782px}
+.tracks{position:relative;flex:0 0 544px}
 .hd{height:46px;display:flex;align-items:center;padding:0 12px;font-weight:600;font-size:12px;color:var(--ts)}
 .lbl{height:28px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:8px;padding:0 12px}
 .lbl .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -57,16 +57,29 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:12px;color:var(--ts)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:11px;height:11px;border-radius:2px;display:inline-block}
+.cut{margin-top:36px}
+.cut h2{font-size:15px;font-weight:600;margin:0 0 10px;letter-spacing:-0.01em}
+.cut .tblwrap{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--s2)}
+.cut table{border-collapse:collapse;width:100%;min-width:660px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Cascadia Mono',monospace;font-size:12px}
+.cut th{text-align:left;padding:9px 12px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--tm);border-bottom:1px solid var(--bd);font-weight:600}
+.cut td{padding:7px 12px;border-top:1px solid var(--bd);white-space:nowrap;font-variant-numeric:tabular-nums;vertical-align:middle}
+.cut td.sv{font-weight:600}
+.cut .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;font-family:inherit}
+.cut .tag.lever{color:#EF9F27;border:1px solid rgba(239,159,39,.45);background:rgba(239,159,39,.12);background-image:repeating-linear-gradient(45deg,rgba(239,159,39,.12) 0 5px,transparent 5px 10px)}
+.cut .tag.held{color:var(--tm);border:1px solid var(--bd);background:var(--s1)}
+.cut tr.net td{border-top:2px solid var(--bds);font-weight:700}
+.cut .ship{font-size:12px;color:var(--ts);margin-top:10px}
+.cut .ship b{color:var(--tp);font-weight:600}
 </style>
 <div class="page">
 <h1>Cables</h1>
-<p class="sub">Week-based launch timeline · New product · Logo + Colour · NA cert, CBU (no BIS/WPC, no India assembly) · wired, no software · sea freight</p>
+<p class="sub">China / CBU / Logo / Sea · Week-based launch timeline · October 2026 plan · 1 prototype attempt · NA cert (no BIS/WPC, no India assembly)</p>
 <div class="meta">
-<div><div class="k">Start (w0)</div><div class="v">Mon 29 Jun 2026</div></div>
-<div><div class="k">Now</div><div class="v">13 Jul · mid funnel</div></div>
-<div><div class="k">Warehouse-ready</div><div class="v">12 Nov 2026</div></div>
-<div><div class="k">Launch</div><div class="v">1 Dec 2026 (rolled)</div></div>
-<div><div class="k">Critical path</div><div class="v">19.5 weeks</div></div>
+<div><div class="k">Start (w0)</div><div class="v">Mon 6 Jul 2026</div></div>
+<div><div class="k">Prototyping starts</div><div class="v">Mon 20 Jul 2026</div></div>
+<div><div class="k">Ship departure</div><div class="v">Sun 13 Sep (sea, co-booked)</div></div>
+<div><div class="k">Warehouse-ready</div><div class="v">4 Oct 2026</div></div>
+<div><div class="k">Launch</div><div class="v">October 2026 (15 Oct)</div></div>
 </div>
 <div class="ctl"><span class="lab">Team</span>
 <button class="btn on" data-team="all">All</button>
@@ -81,39 +94,49 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <div class="tracks" id="tracks"></div>
 </div></div>
 <div class="legend">
-<span><i style="background:transparent;border:2px solid var(--ts)"></i>Getting models</span>
+<span><i style="background:transparent;border:2px solid var(--ts)"></i>Payment clearing + misc</span>
 <span><i style="background:#EF9F27"></i>Design</span>
-<span><i style="background:#1D9E75"></i>Packaging</span>
 <span><i style="background:#378ADD"></i>Manufacturing</span>
 <span><i style="background:#639922"></i>Logistics</span>
 <span><i style="background:#8a8980"></i>Buffer</span>
 <span><i style="background:#E24B4A"></i>Launch / now</span>
 </div>
+<div class="cut">
+<h2>Where the days come from — customs, production all held</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Block</th><th>Baseline</th><th>Cut to</th><th>Saved</th><th>Lever</th></tr></thead>
+<tbody>
+<tr class="net"><td>Net</td><td>Oct 25</td><td>Oct 4</td><td class="sv">−21</td><td>November → October</td></tr>
+<tr><td>Prototyping</td><td>2× · 42d</td><td>1× · 21d</td><td class="sv">−21</td><td><span class="tag lever">Drop 2nd attempt</span> 3 wk each</td></tr>
+<tr><td>Testing/feedback</td><td>3d</td><td>3d</td><td>0</td><td><span class="tag held">🔒 Held</span> std</td></tr>
+<tr><td>Contract</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Held</span> std</td></tr>
+<tr><td>Sea shipping</td><td>11d</td><td>11d</td><td>0</td><td><span class="tag held">🔒 Held</span> sea kept, co-booked 13 Sep</td></tr>
+<tr><td>Customs</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Held</span> statutory</td></tr>
+<tr><td>Final production</td><td>24d</td><td>24d</td><td>0</td><td><span class="tag held">🔒 Held</span> never crashed</td></tr>
+<tr><td>Last mile</td><td>3d</td><td>3d</td><td>0</td><td><span class="tag held">🔒 Held</span> std</td></tr>
+</tbody>
+</table></div>
+<p class="ship">Ships <b>13 Sep</b> — co-booked with <b>adapter</b> (same departure date; adapter air / cable sea).</p>
+</div>
 </div>
 <script>
 (function(){
-var START=new Date(2026,5,29),WPX=34,NW=23,NOWW=2;
+var START=new Date(2026,6,6),WPX=34,NW=16,NOWW=4/7;
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function ad(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function fmt(d){return d.getDate()+' '+MON[d.getMonth()];}
-var COL={Design:'#EF9F27',Packaging:'#1D9E75',Manufacturing:'#378ADD',Logistics:'#639922',Buffer:'#8a8980',Launch:'#E24B4A'};
+var COL={Design:'#EF9F27',Manufacturing:'#378ADD',Logistics:'#639922',Buffer:'#8a8980',Launch:'#E24B4A'};
 var T=[
- {n:'Getting models',ph:'Sourcing',s:0,e:4,team:'product',du:'4w',sp:1},
- {n:'Product design',ph:'Design',s:4,e:5.5,team:'design',du:'1.5w'},
- {n:'Product prototyping',ph:'Design',s:5.5,e:8,team:'design',du:'2.5w'},
- {n:'Prototype feedback',ph:'Design',s:8,e:8.5,team:'design',du:'0.5w'},
- {n:'Packaging design',ph:'Packaging',s:4,e:5,team:'design',du:'1w'},
- {n:'Packaging prototyping',ph:'Packaging',s:5,e:8,team:'design',du:'3w'},
- {n:'Packaging feedback',ph:'Packaging',s:8,e:10,team:'design',du:'2w'},
- {n:'Contract – packaging',ph:'Packaging',s:10,e:11,team:'product',du:'1w'},
- {n:'Packaging production',ph:'Packaging',s:11,e:14,team:'product',du:'3w'},
- {n:'Contract – product',ph:'Manufacturing',s:8.5,e:9.5,team:'product',du:'1w'},
- {n:'Final production',ph:'Manufacturing',s:9.5,e:15,team:'product',du:'5.5w'},
- {n:'Intl shipping (sea)',ph:'Logistics',s:15,e:18,team:'product',du:'3w'},
- {n:'Customs & local',ph:'Logistics',s:18,e:19,team:'product',du:'1w'},
- {n:'To warehouse',ph:'Logistics',s:19,e:19.5,team:'product',du:'0.5w'},
- {n:'Buffer',ph:'Buffer',s:19.5,e:21,team:'product',du:'1.5w'},
- {n:'Launch (rolled)',ph:'Launch',s:22.14,e:22.14,team:'product',du:'1 Dec',mile:1}
+ {n:'Payment clearing + misc',ph:'Sourcing',s:0,e:14/7,team:'product',du:'2w',sp:1},
+ {n:'Product prototyping (1×)',ph:'Design',s:14/7,e:35/7,team:'design',du:'21d'},
+ {n:'Testing & feedback',ph:'Design',s:35/7,e:38/7,team:'design',du:'3d'},
+ {n:'Contract – product',ph:'Manufacturing',s:38/7,e:45/7,team:'product',du:'7d'},
+ {n:'Final production',ph:'Manufacturing',s:45/7,e:69/7,team:'product',du:'24d'},
+ {n:'Intl shipping (sea)',ph:'Logistics',s:69/7,e:80/7,team:'product',du:'11d'},
+ {n:'Customs & local',ph:'Logistics',s:80/7,e:87/7,team:'product',du:'7d'},
+ {n:'Last mile',ph:'Logistics',s:87/7,e:90/7,team:'product',du:'3d'},
+ {n:'Buffer',ph:'Buffer',s:90/7,e:100.5/7,team:'product',du:'1.5w'},
+ {n:'Launch (October)',ph:'Launch',s:101/7,e:101/7,team:'product',du:'15 Oct',mile:1}
 ];
 var team='all',wk='all';
 function ov(t,i){ if(t.mile) return t.s>=i && t.s<i+1; return t.s<i+1 && t.e>i; }
@@ -132,12 +155,12 @@ function render(){
  vis.forEach(function(t){
    var dim=(wk!=='all'&&!ov(t,wk))?' dim':'';
    var inner='';
-   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 1 Dec 2026 (rolled from 23 Nov)"></div>'; }
+   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 15 Oct 2026 (October)"></div>'; }
    else { var c=t.sp?'transparent':COL[t.ph]; var bd=t.sp?';border:2.5px solid var(--ts)':'';
      inner='<div class="bar" style="left:'+(t.s*WPX)+'px;width:'+((t.e-t.s)*WPX)+'px;background:'+c+bd+'" title="'+fmt(ad(START,t.s*7))+' – '+fmt(ad(START,t.e*7))+'"></div>'; }
    th+='<div class="trow'+dim+'">'+inner+'</div>';
  });
- th+='<div class="wk" id="wk"></div><div class="now" id="now"></div><div class="nowlab" style="left:'+(NOWW*WPX)+'px">13 Jul · now</div>';
+ th+='<div class="wk" id="wk"></div><div class="now" id="now"></div><div class="nowlab" style="left:'+(NOWW*WPX)+'px">10 Jul · now</div>';
  tracks.innerHTML=th;
  var thead=document.getElementById('thead'),hh='';
  for(var i=0;i<NW;i++){ var d=ad(START,i*7); hh+='<div class="tk" style="left:'+(i*WPX)+'px"><b>'+(i+1)+'</b>'+(i%2===0?'<br>'+fmt(d):'')+'</div>'; }
@@ -146,7 +169,7 @@ function render(){
  var now=document.getElementById('now'); now.style.left=(NOWW*WPX)+'px'; now.style.height=H+'px';
  var wkEl=document.getElementById('wk');
  if(wk!=='all'){ wkEl.style.display='block'; wkEl.style.left=(wk*WPX)+'px'; wkEl.style.top='46px'; wkEl.style.height=(vis.length*28)+'px'; }
- if(wk==='all'){ info.innerHTML='<b>All weeks</b> · w0 = Mon 29 Jun 2026 · red line = <b>13 Jul</b> (mid getting models) → warehouse 12 Nov (19.5w) → buffer ends 23 Nov → after the 20th, so <b>launch rolls to 1 Dec 2026</b>. CBU · wired · sea. '+(team==='all'?'':'Filtered to <b>'+team+' team</b>.'); }
+ if(wk==='all'){ info.innerHTML='<b>All weeks</b> · w0 = Mon 6 Jul 2026 · red line = <b>10 Jul</b> (payment clearing + misc) · proto starts <b>20 Jul</b> (1 attempt) → last mile ends <b>4 Oct</b> = 1st week of October → <b>October launch</b> (milestone 15 Oct after 1.5w buffer). CBU · sea, ships 13 Sep co-booked with adapter. '+(team==='all'?'':'Filtered to <b>'+team+' team</b>.'); }
  else { var d0=ad(START,wk*7),d1=ad(START,(wk+1)*7); var act=vis.filter(function(t){return ov(t,wk);}).map(function(t){return t.n;});
    info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' – '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
 }
