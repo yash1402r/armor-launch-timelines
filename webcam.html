@@ -23,9 +23,9 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 .info{font-size:12.5px;color:var(--ts);margin:8px 0 14px;line-height:1.55;min-height:36px}
 .info b{color:var(--tp);font-weight:600}
 .wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--s2)}
-.gantt{display:flex;min-width:972px;position:relative}
+.gantt{display:flex;min-width:938px;position:relative}
 .labels{position:sticky;left:0;z-index:3;background:var(--s1);flex:0 0 190px;border-right:1px solid var(--bd)}
-.tracks{position:relative;flex:0 0 782px}
+.tracks{position:relative;flex:0 0 748px}
 .hd{height:46px;display:flex;align-items:center;padding:0 12px;font-weight:600;font-size:12px;color:var(--ts)}
 .lbl{height:28px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:8px;padding:0 12px}
 .lbl .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -43,11 +43,30 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:12px;color:var(--ts)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .legend i{width:11px;height:11px;border-radius:2px;display:inline-block}
+.cut{margin-top:36px}
+.cut h2{font-size:15px;font-weight:600;margin:0 0 10px;letter-spacing:-0.01em}
+.cut .tblwrap{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--s2)}
+.cut table{border-collapse:collapse;width:100%;min-width:660px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Cascadia Mono',monospace;font-size:12px}
+.cut th{text-align:left;padding:9px 12px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--tm);border-bottom:1px solid var(--bd);font-weight:600}
+.cut td{padding:7px 12px;border-top:1px solid var(--bd);white-space:nowrap;font-variant-numeric:tabular-nums;vertical-align:middle}
+.cut td.sv{font-weight:600}
+.cut .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;font-family:inherit}
+.cut .tag.lever{color:#EF9F27;border:1px solid rgba(239,159,39,.45);background:rgba(239,159,39,.12);background-image:repeating-linear-gradient(45deg,rgba(239,159,39,.12) 0 5px,transparent 5px 10px)}
+.cut .tag.held{color:var(--tm);border:1px solid var(--bd);background:var(--s1)}
+.cut tr.net td{border-top:2px solid var(--bds);font-weight:700}
+.cut .ship{font-size:12px;color:var(--ts);margin-top:10px}
+.cut .ship b{color:var(--tp);font-weight:600}
 </style>
 <div class="page">
 <h1>Webcam</h1>
-<p class="sub">Week-based launch timeline · New product · Logo + Colour · BIS / SKD, India assembly · wired, no software · sea freight</p>
-<div class="meta"><div><div class="k">Start (w0)</div><div class="v">Mon 3 Aug 2026</div></div><div><div class="k">Warehouse-ready</div><div class="v">28 Dec 2026</div></div><div><div class="k">Launch</div><div class="v">8 Jan 2027</div></div><div><div class="k">Critical path</div><div class="v">21 weeks</div></div></div>
+<p class="sub">China / CBU / Logo / Sea · Week-based launch timeline · December 2026 plan · fully standard path, zero cuts · BIS</p>
+<div class="meta">
+<div><div class="k">Start</div><div class="v">Sat 11 Jul 2026</div></div>
+<div><div class="k">Prototyping starts</div><div class="v">Sat 1 Aug 2026</div></div>
+<div><div class="k">Ship departure</div><div class="v">20 Oct (sea, co-booked)</div></div>
+<div><div class="k">Warehouse-ready</div><div class="v">10 Nov 2026</div></div>
+<div><div class="k">Launch</div><div class="v">December 2026 (1 Dec, rolled)</div></div>
+</div>
 <div class="ctl"><span class="lab">Team</span>
 <button class="btn on" data-team="all">All</button>
 <button class="btn" data-team="product">Product team</button>
@@ -60,16 +79,57 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <div class="labels" id="labels"></div>
 <div class="tracks" id="tracks"></div>
 </div></div>
-<div class="legend"><span><i style="background:transparent;border:2px solid var(--ts)"></i>Getting models</span><span><i style="background:#EF9F27"></i>Design</span><span><i style="background:#1D9E75"></i>Packaging</span><span><i style="background:#7F77DD"></i>BIS + assembler</span><span><i style="background:#378ADD"></i>Manufacturing</span><span><i style="background:#639922"></i>Logistics</span><span><i style="background:#8a8980"></i>Buffer</span><span><i style="background:#E24B4A"></i>Launch</span></div>
+<div class="legend">
+<span><i style="background:transparent;border:2px solid var(--ts)"></i>Suppliers + samples</span>
+<span><i style="background:#EF9F27"></i>Design</span>
+<span><i style="background:#7F77DD"></i>BIS</span>
+<span><i style="background:#378ADD"></i>Manufacturing</span>
+<span><i style="background:#639922"></i>Logistics</span>
+<span><i style="background:#8a8980"></i>Buffer</span>
+<span><i style="background:#E24B4A"></i>Launch</span>
+</div>
+<div class="cut">
+<h2>Where the days come from — nothing cut, December fits standard</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Block</th><th>Baseline</th><th>Cut to</th><th>Saved</th><th>Lever</th></tr></thead>
+<tbody>
+<tr class="net"><td>Net</td><td>Nov 10</td><td>Nov 10</td><td class="sv">0</td><td>December fits with 27d start-slack in hand</td></tr>
+<tr><td>Prototyping</td><td>2× · 42d</td><td>2× · 42d</td><td>0</td><td><span class="tag held">🔒 Kept</span> both attempts — no cut needed</td></tr>
+<tr><td>Testing/feedback</td><td>3d</td><td>3d</td><td>0</td><td><span class="tag held">🔒 Kept</span> standard</td></tr>
+<tr><td>Contract</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Kept</span> standard</td></tr>
+<tr><td>Sea shipping</td><td>11d</td><td>11d</td><td>0</td><td><span class="tag held">🔒 Held</span> sea kept — co-booked 20 Oct</td></tr>
+<tr><td>Customs</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Held</span> statutory</td></tr>
+<tr><td>Final production</td><td>28d</td><td>28d</td><td>0</td><td><span class="tag held">🔒 Held</span> never crashed</td></tr>
+<tr><td>Last mile</td><td>3d</td><td>3d</td><td>0</td><td><span class="tag held">🔒 Kept</span> standard</td></tr>
+</tbody>
+</table></div>
+<p class="ship">Ships <b>20 Oct (sea)</b> — co-booked with <b>USB-C microphone</b> (same date, same mode). Could join the 17 Oct trio booking, but that pulls last mile to Nov 7 (1st week) → November; December launch keeps the 20 Oct pairing.</p>
+<p class="ship">Start slack: proto can start as late as <b>28 Aug</b> (sourcing kickoff by 7 Aug) and still make December — <b>27 days</b> of buffer on the start date.</p>
+</div>
 </div>
 <script>
 (function(){
-var START=new Date(2026,7,3),WPX=34,NW=23;
+var START=new Date(2026,6,11),WPX=34,NW=22;
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function ad(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function fmt(d){return d.getDate()+' '+MON[d.getMonth()];}
-var COL={Design:'#EF9F27',Commitment:'#7F77DD',Packaging:'#1D9E75',Manufacturing:'#378ADD',Logistics:'#639922',Buffer:'#8a8980',Launch:'#E24B4A'};
-var T=[{n:'Getting models',ph:'Sourcing',s:0,e:4,team:'product',du:'4w',sp:1},{n:'Product design',ph:'Design',s:4,e:5.5,team:'design',du:'1.5w'},{n:'Product prototyping',ph:'Design',s:5.5,e:8,team:'design',du:'2.5w'},{n:'Prototype feedback',ph:'Design',s:8,e:8.5,team:'design',du:'0.5w'},{n:'Finalise assembler',ph:'Commitment',s:4,e:4.5,team:'product',du:'0.5w'},{n:'BIS',ph:'Commitment',s:4.5,e:8.5,team:'product',du:'4w'},{n:'Packaging design',ph:'Packaging',s:4,e:5,team:'design',du:'1w'},{n:'Packaging prototyping',ph:'Packaging',s:5,e:8,team:'design',du:'3w'},{n:'Packaging feedback',ph:'Packaging',s:8,e:10,team:'design',du:'2w'},{n:'Contract – packaging',ph:'Packaging',s:10,e:11,team:'product',du:'1w'},{n:'Packaging production',ph:'Packaging',s:11,e:14,team:'product',du:'3w'},{n:'Contract – product',ph:'Manufacturing',s:8.5,e:9.5,team:'product',du:'1w'},{n:'Final production',ph:'Manufacturing',s:9.5,e:15,team:'product',du:'5.5w'},{n:'Intl shipping (sea)',ph:'Logistics',s:15,e:18,team:'product',du:'3w'},{n:'Customs & local',ph:'Logistics',s:18,e:19,team:'product',du:'1w'},{n:'Assembly – India',ph:'Logistics',s:19,e:20.5,team:'product',du:'1.5w'},{n:'To warehouse',ph:'Logistics',s:20.5,e:21,team:'product',du:'0.5w'},{n:'Buffer',ph:'Buffer',s:21,e:22.5,team:'product',du:'1.5w'},{n:'Launch',ph:'Launch',s:22.5,e:22.5,team:'product',du:'8 Jan',mile:1}];
+var COL={Design:'#EF9F27',Commitment:'#7F77DD',Manufacturing:'#378ADD',Logistics:'#639922',Buffer:'#8a8980',Launch:'#E24B4A'};
+var T=[
+ {n:'Find suppliers',ph:'Sourcing',s:0,e:7/7,team:'product',du:'7d',sp:1},
+ {n:'Test products',ph:'Sourcing',s:7/7,e:14/7,team:'product',du:'7d',sp:1},
+ {n:'Ship samples to office',ph:'Sourcing',s:14/7,e:21/7,team:'product',du:'7d',sp:1},
+ {n:'Product design',ph:'Design',s:11/7,e:21/7,team:'design',du:'10d'},
+ {n:'BIS',ph:'Commitment',s:4/7,e:46/7,team:'product',du:'42d'},
+ {n:'Product prototyping (2×)',ph:'Design',s:21/7,e:63/7,team:'design',du:'42d'},
+ {n:'Testing & feedback',ph:'Design',s:63/7,e:66/7,team:'design',du:'3d'},
+ {n:'Contract – product',ph:'Manufacturing',s:66/7,e:73/7,team:'product',du:'7d'},
+ {n:'Final production',ph:'Manufacturing',s:73/7,e:101/7,team:'product',du:'28d'},
+ {n:'Intl shipping (sea)',ph:'Logistics',s:101/7,e:112/7,team:'product',du:'11d'},
+ {n:'Customs & local',ph:'Logistics',s:112/7,e:119/7,team:'product',du:'7d'},
+ {n:'Last mile',ph:'Logistics',s:119/7,e:122/7,team:'product',du:'3d'},
+ {n:'Buffer',ph:'Buffer',s:122/7,e:132.5/7,team:'product',du:'1.5w'},
+ {n:'Launch (rolled)',ph:'Launch',s:143/7,e:143/7,team:'product',du:'1 Dec',mile:1}
+];
 var team='all',wk='all';
 function ov(t,i){ if(t.mile) return t.s>=i && t.s<i+1; return t.s<i+1 && t.e>i; }
 var labels=document.getElementById('labels'),tracks=document.getElementById('tracks'),info=document.getElementById('info');
@@ -87,9 +147,9 @@ function render(){
  vis.forEach(function(t){
    var dim=(wk!=='all'&&!ov(t,wk))?' dim':'';
    var inner='';
-   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 8 Jan 2027"></div>'; }
+   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 1 Dec 2026 (rolled from 21 Nov)"></div>'; }
    else { var c=t.sp?'transparent':COL[t.ph]; var bd=t.sp?';border:2.5px solid var(--ts)':'';
-     inner='<div class="bar" style="left:'+(t.s*WPX)+'px;width:'+((t.e-t.s)*WPX)+'px;background:'+c+bd+'" title="'+fmt(ad(START,t.s*7))+' - '+fmt(ad(START,t.e*7))+'"></div>'; }
+     inner='<div class="bar" style="left:'+(t.s*WPX)+'px;width:'+((t.e-t.s)*WPX)+'px;background:'+c+bd+'" title="'+fmt(ad(START,t.s*7))+' – '+fmt(ad(START,t.e*7))+'"></div>'; }
    th+='<div class="trow'+dim+'">'+inner+'</div>';
  });
  th+='<div class="wk" id="wk"></div>';
@@ -99,9 +159,9 @@ function render(){
  thead.innerHTML=hh;
  var wkEl=document.getElementById('wk');
  if(wk!=='all'){ wkEl.style.display='block'; wkEl.style.left=(wk*WPX)+'px'; wkEl.style.top='46px'; wkEl.style.height=(vis.length*28)+'px'; }
- if(wk==='all'){ info.innerHTML='<b>All weeks</b> · w0 = Mon 3 Aug 2026 → warehouse 28 Dec (21w) → <b>launch 8 Jan 2027</b> (+1.5w buffer). SKD · wired · sea. '+(team==='all'?'':'Filtered to <b>'+team+' team</b>.'); }
+ if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers 7d → test products 7d → air samples 7d; design runs parallel 22 Jul–1 Aug) · proto starts <b>1 Aug</b> (2 attempts kept) → last mile ends <b>10 Nov</b> (past the Nov 1st week) → buffer ends 21 Nov → after the 20th, so <b>launch rolls to 1 Dec 2026 (December)</b>. CBU · sea, ships 20 Oct co-booked with USB-C microphone. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
  else { var d0=ad(START,wk*7),d1=ad(START,(wk+1)*7); var act=vis.filter(function(t){return ov(t,wk);}).map(function(t){return t.n;});
-   info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' - '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
+   info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' – '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
 }
 var wkrow=document.getElementById('wkrow'),wh='';
 for(var i=0;i<NW;i++){wh+='<button class="btn" data-wk="'+i+'" title="'+fmt(ad(START,i*7))+'">W'+(i+1)+'</button>';}

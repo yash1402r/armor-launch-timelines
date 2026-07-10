@@ -14,12 +14,12 @@ Each product page is also directly openable:
 |---|---|---|---|
 | Adapter | SKD | October 2026 (17 Oct) | adapter.html |
 | Cables | CBU | October 2026 (15 Oct) | cables.html |
-| Wireless Keyboard | SKD | 18 Dec 2026 | wireless-keyboard.html |
-| Wireless Mouse | CBU | 7 Dec 2026 | wireless-mouse.html |
+| Wireless Keyboard | SKD | November 2026 (6 Nov) | wireless-keyboard.html |
+| Wireless Mouse | CBU | November 2026 (16 Nov) | wireless-mouse.html |
 | Wireless Controller | CBU | October 2026 (17 Oct) | controller.html |
-| USB-C Dock | CBU | 1 Jan 2027 | usb-c-doc.html |
-| USB-C Microphone | CBU | 1 Jan 2027 | usb-c-microphone.html |
-| Webcam | SKD | 8 Jan 2027 | webcam.html |
-| Wired Headphones | CBU | 1 Feb 2027 | wired-headphones.html |
+| USB-C Dock | CBU | November 2026 (16 Nov) | usb-c-doc.html |
+| USB-C Microphone | CBU | December 2026 (1 Dec) | usb-c-microphone.html |
+| Webcam | CBU | December 2026 (1 Dec) | webcam.html |
+| Wired Headphones | CBU | November 2026 (16 Nov) | wired-headphones.html |
 
 All pages are self-contained (no server, no login) and work offline. Data is a snapshot; rebuild from the Products table when plans change.
