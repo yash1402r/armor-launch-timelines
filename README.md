@@ -3,6 +3,10 @@
 Live dashboard (open in any browser, no login):
 **https://yash1402r.github.io/armor-launch-timelines/**
 
+**Merged Oct·Nov·Dec launch calendar (all 9 products, one waterfall):**
+**https://yash1402r.github.io/armor-launch-timelines/oct-nov-dec-plan.html**
+— collapsible ☰ filter sidebar (Product / Team with people / Week / Task type), launch date tags on every row, and click-a-product-name expandable "Where the days come from" cut tables.
+
 - **Filter bar on top** — combine **Product** (isolate one), **Team** (All / Product / Design), **Week**, and **Task type**. Filters apply to both the waterfall and the digest.
 - **Full view** — a waterfall Gantt: every task is its own labelled block, one colour per product, on a shared Jun 2026 → Feb 2027 calendar, with warehouse/launch/slack per product, a TODAY line, and launch flags.
 - **On the desk** — the filtered task list, tagged hands-on / follow-up / due, with a weekly load read.

@@ -1,0 +1,466 @@
+<title>Armor - Oct . Nov . Dec Launch Calendar (9 products)</title>
+<style>
+  :root{
+    --bg:#0B0D10; --panel:#14181D; --panel2:#191E24; --line:#242B33; --line2:#2E3742;
+    --text:#E8ECF1; --mut:#7E8894; --dim:#525C68;
+    --ok:#22c55e; --tight:#f59e0b; --bad:#ef4444;
+  }
+  html,body{background:var(--bg);color:var(--text);font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;}
+  body{padding:0;margin:0;}
+  .num{font-variant-numeric:tabular-nums;font-family:Consolas,'Cascadia Mono',monospace;}
+  .lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--dim);}
+
+  header{padding:22px 28px 16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;justify-content:space-between;}
+  header h1{font-size:19px;font-weight:700;margin:0;color:#fff;letter-spacing:-.2px;}
+  header .sub{font-size:12px;color:var(--mut);margin-top:3px;}
+  .fitline{display:flex;gap:14px;font-size:12px;color:var(--mut);align-items:center;}
+  .fitline b{color:var(--text);font-weight:600;}
+  .dotc{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px;}
+
+  section{padding:18px 28px;}
+  .sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;}
+  .sec-h h2{font-size:13px;font-weight:700;margin:0;text-transform:uppercase;letter-spacing:1.2px;color:var(--mut);}
+  .sec-h .hint{font-size:11.5px;color:var(--dim);}
+
+  /* ============ GANTT ============ */
+  .gwrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);}
+  .gantt{position:relative;min-width:max-content;}
+  .grow{display:flex;border-top:1px solid var(--line);position:relative;}
+  .grow:first-child{border-top:none;}
+  .gname{position:sticky;left:0;z-index:5;width:212px;flex:0 0 212px;background:var(--panel);border-right:1px solid var(--line2);padding:8px 12px;display:flex;flex-direction:column;justify-content:flex-start;gap:3px;box-sizing:border-box;}
+  .gname .nm{font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:7px;line-height:1.25;}
+  .gname .nm a{color:var(--text);text-decoration:none;}
+  .gname .nm a:hover{text-decoration:underline;}
+  .gname .meta{font-size:10.5px;color:var(--mut);display:flex;gap:6px;align-items:center;}
+  .gname .meta .own{color:var(--text);font-weight:600;}
+  .mk{width:62px;flex-shrink:0;color:var(--dim);font-size:9px;text-transform:uppercase;letter-spacing:.6px;font-weight:700;}
+  .chip{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:1.5px 6px;border-radius:8px;}
+  .chip.fits{background:rgba(34,197,94,.14);color:var(--ok);}
+  .chip.tight{background:rgba(245,158,11,.14);color:var(--tight);}
+  .chip.no_fit{background:rgba(239,68,68,.16);color:var(--bad);}
+  .glanes{position:relative;flex:1;}
+  .bar{position:absolute;height:16px;border-radius:3px;font-size:10px;font-weight:600;line-height:16px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#0b0d10;cursor:default;box-sizing:border-box;z-index:1;}
+  .bar.ph1{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.22) 0 3px,transparent 3px 7px);}
+  .bar.past,.blab.past{opacity:.38;}
+  .bar:hover{outline:2px solid #fff3;z-index:4;}
+  .blab{position:absolute;height:16px;line-height:16px;font-size:10px;font-weight:600;white-space:nowrap;pointer-events:none;z-index:1;}
+  .gheadrow{display:flex;position:sticky;top:0;z-index:6;background:var(--panel2);border-bottom:1px solid var(--line2);}
+  .ghspacer{position:sticky;left:0;z-index:7;width:212px;flex:0 0 212px;background:var(--panel2);border-right:1px solid var(--line2);display:flex;align-items:flex-end;padding:6px 12px;}
+  .gheadcells{flex:1;position:relative;}
+  .mrow{display:flex;height:20px;}
+  .mcell{border-left:1px solid var(--line2);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mut);padding:4px 8px 0;box-sizing:border-box;overflow:hidden;white-space:nowrap;}
+  .wrow{display:flex;height:22px;}
+  .wcell{border-left:1px solid var(--line);font-size:9.5px;color:var(--dim);padding:4px 0 0 6px;box-sizing:border-box;white-space:nowrap;overflow:hidden;}
+  .wcell.cur{color:var(--text);font-weight:700;}
+  .gridlines{position:absolute;inset:0;pointer-events:none;z-index:0;}
+  .vline{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.55;}
+  .vline.month{background:var(--line2);opacity:1;}
+  .today{position:absolute;top:0;bottom:0;width:2px;background:#e8ecf1;opacity:.9;z-index:3;pointer-events:none;}
+  .todaytag{position:absolute;top:-1px;transform:translateX(-50%);background:#e8ecf1;color:#0b0d10;font-size:8.5px;font-weight:800;letter-spacing:.8px;padding:1px 5px;border-radius:0 0 4px 4px;z-index:8;}
+  .launchflag{position:absolute;top:2px;bottom:2px;width:2px;border-radius:1px;z-index:2;}
+  .launchtag{position:absolute;top:50%;transform:translate(calc(-100% - 5px),-50%);font-size:9px;font-weight:800;letter-spacing:.3px;padding:1px 6px;border-radius:4px;z-index:3;color:#0b0d10;white-space:nowrap;pointer-events:none;}
+
+  /* expandable per-product cut table */
+  .gname.hascuts{cursor:pointer;}
+  .gname .caret{color:var(--dim);font-size:10px;margin-left:2px;flex-shrink:0;}
+  .cutrow{display:none;border-top:1px solid var(--line);background:#0E1114;}
+  .cutrow.open{display:block;}
+  .cutwrap{position:sticky;left:0;width:min(980px,calc(100vw - 70px));box-sizing:border-box;padding:14px 18px 16px;}
+  .cutwrap h4{margin:0 0 10px;font-size:12.5px;font-weight:700;color:var(--text);}
+  .cuttable{width:100%;border-collapse:collapse;font-family:Consolas,'Cascadia Mono',monospace;font-variant-numeric:tabular-nums;font-size:12px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .cuttable th{font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);font-weight:700;text-align:left;padding:8px 12px;border-bottom:1px solid var(--line2);}
+  .cuttable td{padding:7px 12px;border-bottom:1px solid var(--line);color:var(--text);}
+  .cuttable tr:last-child td{border-bottom:none;}
+  .cuttable tr.cnet td{font-weight:700;border-bottom:1px solid var(--line2);}
+  .cuttable .cdim{color:var(--mut);}
+  .ctag{display:inline-block;font-size:10px;font-weight:700;padding:1.5px 9px;border-radius:10px;margin-right:6px;white-space:nowrap;}
+  .ctag.cut{background:rgba(240,162,58,.16);color:#F0A23A;border:1px solid rgba(240,162,58,.45);}
+  .ctag.held{background:#1B2027;color:var(--mut);border:1px solid var(--line2);}
+  .cutfoot{font-size:11px;color:var(--mut);margin-top:8px;}
+
+  /* collapsible left filter panel */
+  #ftoggle{position:fixed;top:12px;left:12px;z-index:60;background:var(--panel2);border:1px solid var(--line2);color:var(--text);font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;cursor:pointer;}
+  #ftoggle:hover{border-color:#5B9CF6;}
+  #fpanel{position:fixed;top:0;left:0;bottom:0;width:248px;background:var(--panel2);border-right:1px solid var(--line2);z-index:55;overflow-y:auto;padding:52px 14px 20px;box-sizing:border-box;transform:translateX(-100%);transition:transform .18s ease;}
+  body.fopen #fpanel{transform:none;}
+  header,section{transition:padding-left .18s ease;}
+  body.fopen header,body.fopen section{padding-left:276px;}
+  .fgrp{margin-bottom:18px;}
+  .fgrp .navlbl{margin-bottom:6px;}
+  #fpanel .weeknav{max-height:34vh;overflow-y:auto;}
+  #fpanel .wpill{font-size:11px;padding:4px 10px;}
+  .ppl{font-size:9.5px;color:var(--dim);display:block;margin-top:1px;}
+  .pth{font-size:10px;color:var(--mut);line-height:1.3;}
+  @media (max-width:900px){body.fopen header,body.fopen section{padding-left:28px;} #fpanel{box-shadow:0 0 40px #000c;}}
+
+  /* tooltip */
+  #tip{position:fixed;z-index:99;background:#1E242C;border:1px solid var(--line2);border-radius:8px;padding:8px 11px;font-size:11.5px;pointer-events:none;display:none;max-width:280px;box-shadow:0 8px 24px #0009;}
+  #tip .t1{font-weight:700;margin-bottom:2px;}
+  #tip .t2{color:var(--mut);}
+
+  /* ============ WEEKLY ============ */
+  .weeknav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+  .wpill{padding:5px 12px;border-radius:16px;border:1px solid var(--line);background:var(--panel);color:var(--mut);font-size:11.5px;font-weight:600;cursor:pointer;}
+  .wpill:hover{border-color:var(--line2);color:var(--text);}
+  .wpill.active{border-color:#5B9CF6;color:#AECBFA;background:#16243A;}
+  .wpill .cnt{font-size:9.5px;opacity:.75;margin-left:4px;}
+  .bar.dimmed,.blab.dimmed{opacity:.07;}
+  .navlbl{margin:2px 0 6px;}
+  .wkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;}
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;border-top:3px solid;}
+  .pcard h3{font-size:12.5px;font-weight:700;margin:0 0 8px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .pcard h3 .chip{flex-shrink:0;}
+  .pcard .own{font-size:10px;color:var(--mut);font-weight:600;margin:-4px 0 6px;}
+  .titem{display:flex;gap:8px;align-items:baseline;padding:4px 0;font-size:12px;border-top:1px solid var(--line);}
+  .titem:first-of-type{border-top:none;}
+  .titem .tn{flex:1;line-height:1.35;}
+  .titem .td{color:var(--dim);font-size:10.5px;flex-shrink:0;}
+  .tag{font-size:8.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;padding:1px 5px;border-radius:3px;flex-shrink:0;position:relative;top:-1px;}
+  .tag.act{background:rgba(91,156,246,.16);color:#AECBFA;}
+  .tag.wait{background:#20262E;color:var(--dim);}
+  .tag.due{background:rgba(245,158,11,.16);color:var(--tight);}
+  .wksum{font-size:12.5px;color:var(--mut);margin-bottom:14px;line-height:1.5;max-width:72ch;}
+  .wksum b{color:var(--text);}
+  .empty{color:var(--dim);font-size:12.5px;padding:20px 0;}
+
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:11px;color:var(--mut);margin-top:10px;align-items:center;}
+  .legend .sw{display:inline-block;width:18px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important;}}
+</style>
+
+<button id="ftoggle">☰ Filters</button>
+<div id="fpanel">
+  <div class="fgrp"><div class="navlbl lbl">Product</div><div class="weeknav" id="prodnav"></div></div>
+  <div class="fgrp"><div class="navlbl lbl">Team</div><div class="weeknav" id="teamnav"></div></div>
+  <div class="fgrp"><div class="navlbl lbl">Week</div><div class="weeknav" id="weeknav"></div></div>
+  <div class="fgrp"><div class="navlbl lbl">Task type</div><div class="weeknav" id="tasknav"></div></div>
+</div>
+
+<header>
+  <div>
+    <h1>Armor - Oct . Nov . Dec Launch Calendar (9 products)</h1>
+    <div class="sub"><b>October</b> Adapter . Cable . Controller (co-book 13 Sep; controller separate 28 Sep) . <b>November</b> Mouse . Wired HP . USB-C Hub (co-book 17 Oct sea) + Keyboard (26 Sep sea) . <b>December</b> Microphone . Webcam (co-book 20 Oct sea, zero cuts) . customs / legal / assembly / production never cut . <b>click a product name to expand its cut table</b> . built <span class="num">Jul 10, 2026</span></div>
+  </div>
+  <div class="fitline" id="fitline"></div>
+</header>
+
+<section>
+  <div class="sec-h"><h2 id="rangeh2">Full view</h2><span class="hint">striped = Phase 1 · solid = Phase 2/3 · faded = already past · ▎+ date tag at row end = launch deadline · click a product name to expand its cut table</span></div>
+  <div class="gwrap" id="gwrap"></div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section>
+  <div class="sec-h"><h2>Week by week — what's on the desk</h2><span class="hint">selectors live in the ☰ Filters panel (left) — combine team + week + task type · HANDS-ON = your team acts · FOLLOW-UP = vendor/transit, chase it · DUE = ends this week</span></div>
+  <div class="wksum" id="wksum"></div>
+  <div class="wkgrid" id="wkgrid"></div>
+</section>
+
+<div id="tip"></div>
+
+<script>
+const DATA = [{"product":"Adapter","launch":"October 2026","launchDate":"2026-10-31","launchMilestone":"2026-10-17","start":"2026-07-10","completion":"2026-10-07","status":"fits","slack":3.4,"url":"#","tasks":[{"n":"Payment Clearing + Misc","ph":"Phase 1","s":"2026-07-10","e":"2026-07-20"},{"n":"Legal BIS","ph":"Phase 1","s":"2026-07-24","e":"2026-08-21"},{"n":"Prototyping 1x","ph":"Phase 2","s":"2026-07-20","e":"2026-08-10"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-08-10","e":"2026-08-12"},{"n":"Contract","ph":"Phase 3","s":"2026-08-12","e":"2026-08-16"},{"n":"Final Production","ph":"Phase 3","s":"2026-08-16","e":"2026-09-13"},{"n":"Air Shipping","ph":"Phase 3","s":"2026-09-13","e":"2026-09-18"},{"n":"Customs","ph":"Phase 3","s":"2026-09-18","e":"2026-09-25"},{"n":"Assembly - India","ph":"Phase 3","s":"2026-09-25","e":"2026-10-05"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-10-05","e":"2026-10-07"}],"cutTitle":"Where the days come from - customs, assembly, production all held","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"1x . 21d","sv":"-21","tt":"cut","tag":"Drop 2nd attempt","note":"3 wk each"},{"b":"International shipping","base":"11d sea","cut":"5d air","sv":"-6","tt":"cut","tag":"Sea -> Air","note":"light unit"},{"b":"Contract (our-end)","base":"7d","cut":"4d","sv":"-3","tt":"cut","tag":"Internal","note":"template + pre-agreed"},{"b":"Testing/feedback","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"same-day sign-off"},{"b":"Last mile (our-end)","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"direct to WH"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Assembly (SKD, India)","base":"10d","cut":"10d","sv":"0","tt":"held","tag":"Held","note":"fixed"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"}],"cutNet":{"base":"Nov 8","cut":"Oct 7","sv":"-32","note":"November -> October"},"cutFoot":"Ships 13 Sep - co-booked with cable (same departure date; adapter air / cable sea).","path":"China / SKD / Logo + Colour / Air","ownerP":"Yash","ownerD":"Anurag"},{"product":"Cable","launch":"October 2026","launchDate":"2026-10-31","launchMilestone":"2026-10-15","start":"2026-07-10","completion":"2026-10-04","status":"fits","slack":3.9,"url":"#","tasks":[{"n":"Payment Clearing + Misc","ph":"Phase 1","s":"2026-07-10","e":"2026-07-20"},{"n":"Prototyping 1x","ph":"Phase 2","s":"2026-07-20","e":"2026-08-10"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-08-10","e":"2026-08-13"},{"n":"Contract","ph":"Phase 3","s":"2026-08-13","e":"2026-08-20"},{"n":"Final Production","ph":"Phase 3","s":"2026-08-20","e":"2026-09-13"},{"n":"Sea Shipping","ph":"Phase 3","s":"2026-09-13","e":"2026-09-24"},{"n":"Customs","ph":"Phase 3","s":"2026-09-24","e":"2026-10-01"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-10-01","e":"2026-10-04"}],"cutTitle":"Where the days come from - customs, production all held","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"1x . 21d","sv":"-21","tt":"cut","tag":"Drop 2nd attempt","note":"3 wk each"},{"b":"Testing/feedback","base":"3d","cut":"3d","sv":"0","tt":"held","tag":"Held","note":"standard"},{"b":"Contract","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"standard"},{"b":"Sea shipping","base":"11d","cut":"11d","sv":"0","tt":"held","tag":"Held","note":"sea kept - co-booked 13 Sep"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Final production","base":"24d","cut":"24d","sv":"0","tt":"held","tag":"Held","note":"never crashed"},{"b":"Last mile","base":"3d","cut":"3d","sv":"0","tt":"held","tag":"Held","note":"standard"}],"cutNet":{"base":"Oct 25","cut":"Oct 4","sv":"-21","note":"November -> October"},"cutFoot":"Ships 13 Sep - co-booked with adapter (same departure date; cable sea / adapter air).","path":"China / CBU / Logo / Sea","ownerP":"Yash","ownerD":"Anurag"},{"product":"Controller","launch":"October 2026","launchDate":"2026-10-31","launchMilestone":"2026-10-17","start":"2026-07-11","completion":"2026-10-07","status":"fits","slack":3.4,"url":"#","tasks":[{"n":"Get Models from China","ph":"Phase 1","s":"2026-07-11","e":"2026-07-25"},{"n":"Test Models","ph":"Phase 1","s":"2026-07-25","e":"2026-08-01"},{"n":"Legal BIS + WPC","ph":"Phase 1","s":"2026-07-15","e":"2026-08-26"},{"n":"Prototyping 1x","ph":"Phase 2","s":"2026-08-01","e":"2026-08-22"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-08-22","e":"2026-08-23"},{"n":"Contract","ph":"Phase 3","s":"2026-08-23","e":"2026-08-26"},{"n":"Final Production","ph":"Phase 3","s":"2026-08-26","e":"2026-09-23"},{"n":"Software","ph":"Phase 3","s":"2026-08-26","e":"2026-09-09"},{"n":"Air Shipping","ph":"Phase 3","s":"2026-09-23","e":"2026-09-28"},{"n":"Customs","ph":"Phase 3","s":"2026-09-28","e":"2026-10-05"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-10-05","e":"2026-10-07"}],"cutTitle":"Where the days come from - customs, production all held","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"1x . 21d","sv":"-21","tt":"cut","tag":"Drop 2nd attempt","note":"3 wk each"},{"b":"International shipping","base":"11d sea","cut":"5d air","sv":"-6","tt":"cut","tag":"Sea -> Air","note":"light unit"},{"b":"Contract (our-end)","base":"7d","cut":"3d","sv":"-4","tt":"cut","tag":"Internal","note":"template + pre-agreed"},{"b":"Testing/feedback","base":"3d","cut":"1d","sv":"-2","tt":"cut","tag":"Internal","note":"same-day sign-off"},{"b":"Last mile (our-end)","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"direct to WH"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"},{"b":"Software","base":"14d","cut":"14d","sv":"0","tt":"kept","tag":"Parallel","note":"off critical path"}],"cutNet":{"base":"Nov 10","cut":"Oct 7","sv":"-34","note":"November -> October"},"cutFoot":"Ships 28 Sep (air) - NOT co-booked with adapter/cable (13 Sep): production is never cut, so a separate booking is the only way to keep October.","path":"China / CBU / Logo / Air","ownerP":"Yash","ownerD":"Anurag"},{"product":"Wireless Mouse","launch":"November 2026","launchDate":"2026-11-30","launchMilestone":"2026-11-16","start":"2026-07-11","completion":"2026-11-06","status":"fits","slack":3.4,"url":"#","tasks":[{"n":"Find Suppliers","ph":"Phase 1","s":"2026-07-11","e":"2026-07-18"},{"n":"Test Products","ph":"Phase 1","s":"2026-07-18","e":"2026-07-25"},{"n":"Ship Samples to Office","ph":"Phase 1","s":"2026-07-25","e":"2026-08-01"},{"n":"Product Design","ph":"Phase 2","s":"2026-07-22","e":"2026-08-01"},{"n":"Legal WPC","ph":"Phase 1","s":"2026-07-15","e":"2026-07-25"},{"n":"Prototyping 2x","ph":"Phase 2","s":"2026-08-01","e":"2026-09-12"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-09-12","e":"2026-09-14"},{"n":"Contract","ph":"Phase 3","s":"2026-09-14","e":"2026-09-19"},{"n":"Final Production","ph":"Phase 3","s":"2026-09-19","e":"2026-10-17"},{"n":"Sea Shipping","ph":"Phase 3","s":"2026-10-17","e":"2026-10-28"},{"n":"Customs","ph":"Phase 3","s":"2026-10-28","e":"2026-11-04"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-11-04","e":"2026-11-06"}],"cutTitle":"Where the days come from - proto attempts kept, customs, production all held","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"2x . 42d","sv":"0","tt":"kept","tag":"Kept","note":"both attempts - cut not needed"},{"b":"Testing/feedback","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"same-day sign-off"},{"b":"Contract (our-end)","base":"7d","cut":"5d","sv":"-2","tt":"cut","tag":"Internal","note":"template + pre-agreed"},{"b":"Last mile (our-end)","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"direct to WH"},{"b":"Sea shipping","base":"11d","cut":"11d","sv":"0","tt":"held","tag":"Held","note":"sea kept - co-booked 17 Oct"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"}],"cutNet":{"base":"Nov 10","cut":"Nov 6","sv":"-4","note":"December -> November"},"cutFoot":"Ships 17 Oct (sea) - co-booked with wired headphones + USB-C hub dock (same date, same mode).","path":"China / CBU / Logo / Sea","ownerP":"Naman","ownerD":"Anurag"},{"product":"Wired Headphones","launch":"November 2026","launchDate":"2026-11-30","launchMilestone":"2026-11-16","start":"2026-07-11","completion":"2026-11-06","status":"fits","slack":3.4,"url":"#","tasks":[{"n":"Find Suppliers","ph":"Phase 1","s":"2026-07-11","e":"2026-07-18"},{"n":"Test Products","ph":"Phase 1","s":"2026-07-18","e":"2026-07-25"},{"n":"Ship Samples to Office","ph":"Phase 1","s":"2026-07-25","e":"2026-08-01"},{"n":"Product Design","ph":"Phase 2","s":"2026-07-22","e":"2026-08-01"},{"n":"Prototyping 2x","ph":"Phase 2","s":"2026-08-01","e":"2026-09-12"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-09-12","e":"2026-09-14"},{"n":"Contract","ph":"Phase 3","s":"2026-09-14","e":"2026-09-19"},{"n":"Final Production","ph":"Phase 3","s":"2026-09-19","e":"2026-10-17"},{"n":"Sea Shipping","ph":"Phase 3","s":"2026-10-17","e":"2026-10-28"},{"n":"Customs","ph":"Phase 3","s":"2026-10-28","e":"2026-11-04"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-11-04","e":"2026-11-06"}],"cutTitle":"Where the days come from - proto attempts kept, customs, production all held","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"2x . 42d","sv":"0","tt":"kept","tag":"Kept","note":"both attempts - cut not needed"},{"b":"Testing/feedback","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"same-day sign-off"},{"b":"Contract (our-end)","base":"7d","cut":"5d","sv":"-2","tt":"cut","tag":"Internal","note":"template + pre-agreed"},{"b":"Last mile (our-end)","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"direct to WH"},{"b":"Sea shipping","base":"11d","cut":"11d","sv":"0","tt":"held","tag":"Held","note":"sea kept - co-booked 17 Oct"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"}],"cutNet":{"base":"Nov 10","cut":"Nov 6","sv":"-4","note":"December -> November"},"cutFoot":"Ships 17 Oct (sea) - co-booked with wireless mouse + USB-C hub dock (same date, same mode).","path":"China / CBU / Logo / Sea","ownerP":"Naman","ownerD":"Aniket"},{"product":"USB-C Hub Dock","launch":"November 2026","launchDate":"2026-11-30","launchMilestone":"2026-11-16","start":"2026-07-11","completion":"2026-11-06","status":"fits","slack":3.4,"url":"#","tasks":[{"n":"Find Suppliers","ph":"Phase 1","s":"2026-07-11","e":"2026-07-18"},{"n":"Test Products","ph":"Phase 1","s":"2026-07-18","e":"2026-07-25"},{"n":"Ship Samples to Office","ph":"Phase 1","s":"2026-07-25","e":"2026-08-01"},{"n":"Product Design","ph":"Phase 2","s":"2026-07-22","e":"2026-08-01"},{"n":"Legal BIS","ph":"Phase 1","s":"2026-07-15","e":"2026-08-26"},{"n":"Prototyping 2x","ph":"Phase 2","s":"2026-08-01","e":"2026-09-12"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-09-12","e":"2026-09-14"},{"n":"Contract","ph":"Phase 3","s":"2026-09-14","e":"2026-09-19"},{"n":"Final Production","ph":"Phase 3","s":"2026-09-19","e":"2026-10-17"},{"n":"Sea Shipping","ph":"Phase 3","s":"2026-10-17","e":"2026-10-28"},{"n":"Customs","ph":"Phase 3","s":"2026-10-28","e":"2026-11-04"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-11-04","e":"2026-11-06"}],"cutTitle":"Where the days come from - proto attempts kept, customs, production all held","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"2x . 42d","sv":"0","tt":"kept","tag":"Kept","note":"both attempts - cut not needed"},{"b":"Testing/feedback","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"same-day sign-off"},{"b":"Contract (our-end)","base":"7d","cut":"5d","sv":"-2","tt":"cut","tag":"Internal","note":"template + pre-agreed"},{"b":"Last mile (our-end)","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"direct to WH"},{"b":"Sea shipping","base":"11d","cut":"11d","sv":"0","tt":"held","tag":"Held","note":"sea kept - co-booked 17 Oct"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"}],"cutNet":{"base":"Nov 10","cut":"Nov 6","sv":"-4","note":"December -> November"},"cutFoot":"Ships 17 Oct (sea) - co-booked with wireless mouse + wired headphones (same date, same mode).","path":"China / CBU / Logo / Sea","ownerP":"Yash","ownerD":"Aniket"},{"product":"Keyboard","launch":"November 2026","launchDate":"2026-11-30","launchMilestone":"2026-11-06","start":"2026-07-11","completion":"2026-10-26","status":"fits","slack":5.0,"url":"#","tasks":[{"n":"Find Suppliers","ph":"Phase 1","s":"2026-07-11","e":"2026-07-18"},{"n":"Test Products","ph":"Phase 1","s":"2026-07-18","e":"2026-07-25"},{"n":"Ship Samples to Office","ph":"Phase 1","s":"2026-07-25","e":"2026-08-01"},{"n":"Product Design","ph":"Phase 2","s":"2026-07-22","e":"2026-08-01"},{"n":"Legal BIS + WPC","ph":"Phase 1","s":"2026-07-15","e":"2026-08-26"},{"n":"Prototyping 1x","ph":"Phase 2","s":"2026-08-01","e":"2026-08-22"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-08-22","e":"2026-08-24"},{"n":"Contract","ph":"Phase 3","s":"2026-08-24","e":"2026-08-29"},{"n":"Final Production","ph":"Phase 3","s":"2026-08-29","e":"2026-09-26"},{"n":"Sea Shipping","ph":"Phase 3","s":"2026-09-26","e":"2026-10-07"},{"n":"Customs","ph":"Phase 3","s":"2026-10-07","e":"2026-10-14"},{"n":"Assembly - India","ph":"Phase 3","s":"2026-10-14","e":"2026-10-24"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-10-24","e":"2026-10-26"}],"cutTitle":"Where the days come from - customs, assembly, production all held","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"1x . 21d","sv":"-21","tt":"cut","tag":"Drop 2nd attempt","note":"3 wk each"},{"b":"Testing/feedback","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"same-day sign-off"},{"b":"Contract (our-end)","base":"7d","cut":"5d","sv":"-2","tt":"cut","tag":"Internal","note":"template + pre-agreed"},{"b":"Last mile (our-end)","base":"3d","cut":"2d","sv":"-1","tt":"cut","tag":"Internal","note":"direct to WH"},{"b":"Sea shipping","base":"11d","cut":"11d","sv":"0","tt":"held","tag":"Held","note":"sea kept"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Assembly (SKD, India)","base":"10d","cut":"10d","sv":"0","tt":"held","tag":"Held","note":"fixed"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"}],"cutNet":{"base":"Nov 20","cut":"Oct 26","sv":"-25","note":"December -> November"},"cutFoot":"Ships 26 Sep (sea) - same mode as the trio, NOT the 17 Oct date: SKD assembly adds 10d after customs; the separate earlier booking is what keeps November.","path":"China / SKD / Logo + Colour / Sea","ownerP":"Yash","ownerD":"Aniket"},{"product":"USB-C Microphone","launch":"December 2026","launchDate":"2026-12-31","launchMilestone":"2026-12-01","start":"2026-07-11","completion":"2026-11-10","status":"fits","slack":7.3,"url":"#","tasks":[{"n":"Find Suppliers","ph":"Phase 1","s":"2026-07-11","e":"2026-07-18"},{"n":"Test Products","ph":"Phase 1","s":"2026-07-18","e":"2026-07-25"},{"n":"Ship Samples to Office","ph":"Phase 1","s":"2026-07-25","e":"2026-08-01"},{"n":"Product Design","ph":"Phase 2","s":"2026-07-22","e":"2026-08-01"},{"n":"Legal BIS (confirm)","ph":"Phase 1","s":"2026-07-15","e":"2026-08-26"},{"n":"Prototyping 2x","ph":"Phase 2","s":"2026-08-01","e":"2026-09-12"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-09-12","e":"2026-09-15"},{"n":"Contract","ph":"Phase 3","s":"2026-09-15","e":"2026-09-22"},{"n":"Final Production","ph":"Phase 3","s":"2026-09-22","e":"2026-10-20"},{"n":"Sea Shipping","ph":"Phase 3","s":"2026-10-20","e":"2026-10-31"},{"n":"Customs","ph":"Phase 3","s":"2026-10-31","e":"2026-11-07"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-11-07","e":"2026-11-10"}],"cutTitle":"Where the days come from - nothing cut, December fits standard","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"2x . 42d","sv":"0","tt":"kept","tag":"Kept","note":"both attempts - no cut needed"},{"b":"Testing/feedback","base":"3d","cut":"3d","sv":"0","tt":"kept","tag":"Kept","note":"standard"},{"b":"Contract","base":"7d","cut":"7d","sv":"0","tt":"kept","tag":"Kept","note":"standard"},{"b":"Sea shipping","base":"11d","cut":"11d","sv":"0","tt":"held","tag":"Held","note":"sea kept - co-booked 20 Oct"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"},{"b":"Last mile","base":"3d","cut":"3d","sv":"0","tt":"kept","tag":"Kept","note":"standard"}],"cutNet":{"base":"Nov 10","cut":"Nov 10","sv":"0","note":"December fits - 27d start-slack in hand"},"cutFoot":"Ships 20 Oct (sea) - co-booked with webcam. Joining the 17 Oct trio booking would pull last mile to Nov 7 -> November.","path":"China / CBU / Logo / Sea","ownerP":"Naman","ownerD":"Anurag"},{"product":"Webcam","launch":"December 2026","launchDate":"2026-12-31","launchMilestone":"2026-12-01","start":"2026-07-11","completion":"2026-11-10","status":"fits","slack":7.3,"url":"#","tasks":[{"n":"Find Suppliers","ph":"Phase 1","s":"2026-07-11","e":"2026-07-18"},{"n":"Test Products","ph":"Phase 1","s":"2026-07-18","e":"2026-07-25"},{"n":"Ship Samples to Office","ph":"Phase 1","s":"2026-07-25","e":"2026-08-01"},{"n":"Product Design","ph":"Phase 2","s":"2026-07-22","e":"2026-08-01"},{"n":"Legal BIS","ph":"Phase 1","s":"2026-07-15","e":"2026-08-26"},{"n":"Prototyping 2x","ph":"Phase 2","s":"2026-08-01","e":"2026-09-12"},{"n":"Testing & Feedback","ph":"Phase 2","s":"2026-09-12","e":"2026-09-15"},{"n":"Contract","ph":"Phase 3","s":"2026-09-15","e":"2026-09-22"},{"n":"Final Production","ph":"Phase 3","s":"2026-09-22","e":"2026-10-20"},{"n":"Sea Shipping","ph":"Phase 3","s":"2026-10-20","e":"2026-10-31"},{"n":"Customs","ph":"Phase 3","s":"2026-10-31","e":"2026-11-07"},{"n":"Last Mile to Warehouse","ph":"Phase 3","s":"2026-11-07","e":"2026-11-10"}],"cutTitle":"Where the days come from - nothing cut, December fits standard","cuts":[{"b":"Prototyping","base":"2x . 42d","cut":"2x . 42d","sv":"0","tt":"kept","tag":"Kept","note":"both attempts - no cut needed"},{"b":"Testing/feedback","base":"3d","cut":"3d","sv":"0","tt":"kept","tag":"Kept","note":"standard"},{"b":"Contract","base":"7d","cut":"7d","sv":"0","tt":"kept","tag":"Kept","note":"standard"},{"b":"Sea shipping","base":"11d","cut":"11d","sv":"0","tt":"held","tag":"Held","note":"sea kept - co-booked 20 Oct"},{"b":"Customs","base":"7d","cut":"7d","sv":"0","tt":"held","tag":"Held","note":"statutory"},{"b":"Final production","base":"28d","cut":"28d","sv":"0","tt":"held","tag":"Held","note":"never crashed"},{"b":"Last mile","base":"3d","cut":"3d","sv":"0","tt":"kept","tag":"Kept","note":"standard"}],"cutNet":{"base":"Nov 10","cut":"Nov 10","sv":"0","note":"December fits - 27d start-slack in hand"},"cutFoot":"Ships 20 Oct (sea) - co-booked with USB-C microphone. Joining the 17 Oct trio booking would pull last mile to Nov 7 -> November.","path":"China / CBU / Logo / Sea","ownerP":"Yash","ownerD":"Aniket"}];
+const COLORS = {"Adapter":"#E879C9","Cable":"#94A3B8","Controller":"#F59E0B","Wireless Mouse":"#22D3EE","Wired Headphones":"#F87171","USB-C Hub Dock":"#A78BFA","Keyboard":"#EAD54F","USB-C Microphone":"#C084FC","Webcam":"#38BDF8"};
+
+const HANDS_ON = new Set(["Find Product","Test Product","Finalise Assembler","Product Design","Product Prototype Feedback","Packaging Design","Packaging Prototype Feedback","Contract with Product Supplier","Contract with Packaging Supplier","Last Mile to Warehouse"]);
+
+const DAY = 864e5;
+const TODAY = new Date("2026-07-10");
+// derive grid bounds from the data (Monday padding on both ends)
+const _S = DATA.flatMap(p=>p.tasks.map(t=>+new Date(t.s)));
+const _E = DATA.flatMap(p=>p.tasks.map(t=>+new Date(t.e))).concat(DATA.map(p=>+new Date(p.launchDate)));
+const T0 = new Date(Math.min(..._S)); T0.setDate(T0.getDate()-((T0.getDay()+6)%7)-7);
+const T1 = new Date(Math.max(..._E)); T1.setDate(T1.getDate()+10);
+const PXW = 74;                                // px per week
+const px = d => ((new Date(d) - T0)/DAY/7)*PXW;
+const nWeeks = Math.ceil((T1-T0)/DAY/7);
+const fmt = d => new Date(d).toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+const monLbl = d => new Date(d).toLocaleDateString("en-GB",{month:"short",year:"numeric"});
+
+// order rows: earliest launch first
+DATA.sort((a,b)=> new Date(a.launchDate)-new Date(b.launchDate));
+document.getElementById("rangeh2").textContent = `Full view · ${monLbl(T0)} → ${monLbl(T1)}`;
+
+// ---- header fit summary
+{
+  const c = {fits:0,tight:0,no_fit:0};
+  DATA.forEach(p=>c[p.status]!==undefined&&c[p.status]++);
+  document.getElementById("fitline").innerHTML =
+   `<span><span class="dotc" style="background:var(--ok)"></span><b>${c.fits}</b> fit</span>`+
+   `<span><span class="dotc" style="background:var(--tight)"></span><b>${c.tight}</b> tight</span>`+
+   `<span><span class="dotc" style="background:var(--bad)"></span><b>${c.no_fit}</b> don't fit</span>`;
+}
+
+// ---- waterfall: every task gets its own line, ordered by start date
+function lanes(tasks){
+  const sorted=[...tasks].sort((a,b)=>(new Date(a.s)-new Date(b.s)) || (new Date(a.e)-new Date(b.e)));
+  sorted.forEach((t,i)=>t.lane=i);
+  return {tasks:sorted, n:sorted.length};
+}
+const LH=22, BT=3; // lane height, bar top offset
+
+// ---- build gantt
+const gw = document.getElementById("gwrap");
+const totalW = 212 + nWeeks*PXW;
+let html = `<div class="gantt" style="width:${totalW}px">`;
+
+html += `<div class="gheadrow"><div class="ghspacer"><span class="lbl">Product · Launch</span></div><div class="gheadcells" style="width:${nWeeks*PXW}px">`;
+html += `<div class="mrow">`;
+let mcur = new Date(T0);
+while(mcur < T1){
+  const mEnd = new Date(mcur.getFullYear(), mcur.getMonth()+1, 1);
+  const from = Math.max(px(mcur),0), to = Math.min(px(mEnd), nWeeks*PXW);
+  html += `<div class="mcell" style="width:${to-from}px">${mcur.toLocaleDateString("en-GB",{month:"long"})}</div>`;
+  mcur = mEnd;
+}
+html += `</div><div class="wrow">`;
+for(let w=0;w<nWeeks;w++){
+  const ws=new Date(T0.getTime()+w*7*DAY);
+  const cur = TODAY>=ws && TODAY<new Date(ws.getTime()+7*DAY);
+  html += `<div class="wcell${cur?" cur":""}" style="width:${PXW}px">${fmt(ws)}</div>`;
+}
+html += `</div></div></div>`;
+
+DATA.forEach(p=>{
+  const {tasks,n} = lanes(p.tasks);
+  const h = Math.max(n*LH+6, (p.path||p.ownerP||p.ownerD)?108:(p.owner?92:74));
+  const col = COLORS[p.product] || "#8892A0";
+  const mon=s=>{const d=new Date(s);return d.toLocaleDateString("en-GB",{month:"short"})+(d.getFullYear()!==TODAY.getFullYear()?" '"+String(d.getFullYear()).slice(2):"");};
+  const ly=p.launch.split(" ")[1];
+  const launchMon=p.launch.split(" ")[0].slice(0,3)+(ly&&(+ly!==TODAY.getFullYear())?" '"+ly.slice(2):"");
+  html += `<div class="grow" data-product="${p.product}"><div class="gname" style="height:${h}px">
+    <div class="nm"><span class="dotc" style="background:${col}"></span><a href="${p.url}" target="_blank" rel="noopener">${p.product}</a>${p.cuts?'<span class="caret">▸</span>':''}</div>
+    ${p.path?`<div class="pth">${p.path}</div>`:""}
+    ${(p.ownerP||p.ownerD)?`<div class="meta"><span class="mk">Owners</span><span class="own">${[p.ownerP?"P·"+p.ownerP:"",p.ownerD?"D·"+p.ownerD:""].filter(Boolean).join(" · ")}</span></div>`:""}
+    ${p.owner?`<div class="meta"><span class="mk">Owner</span><span class="own">${p.owner}</span></div>`:""}
+    <div class="meta"><span class="mk">Completion</span><span class="num">${mon(p.completion)}</span></div>
+    <div class="meta"><span class="mk">Launch</span><span class="num">${launchMon}</span><span class="chip ${p.status}">${p.status==="no_fit"?(p.slack+"w"):("+"+p.slack+"w")}</span></div>
+  </div><div class="glanes" style="height:${h}px;width:${nWeeks*PXW}px">`;
+  html += `<div class="gridlines">`;
+  for(let w=0;w<=nWeeks;w++){
+    const ws=new Date(T0.getTime()+w*7*DAY);
+    html += `<div class="vline${ws.getDate()<=7?" month":""}" style="left:${w*PXW}px"></div>`;
+  }
+  html += `<div class="today" style="left:${px(TODAY)}px"></div>`;
+  const lfx = Math.min(px(p.launchMilestone || p.launchDate),nWeeks*PXW-2);
+  const ld = new Date(p.launchMilestone || p.launchDate);
+  const ltxt = "Launch "+ld.getDate()+" "+["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][ld.getMonth()];
+  html += `<div class="launchflag" style="left:${lfx}px;background:${col}"></div>`;
+  html += `<div class="launchtag" style="left:${lfx}px;background:${col}">${ltxt}</div>`;
+  html += `</div>`;
+  tasks.forEach(t=>{
+    const l=px(t.s), w=Math.max(px(t.e)-l, 8);
+    const past = new Date(t.e) < TODAY;
+    const top = BT+t.lane*LH;
+    const needW = t.n.length*5.7+14;
+    const inside = w >= needW;
+    html += `<div class="bar${t.ph==="Phase 1"?" ph1":""}${past?" past":""}" data-n="${t.n}" style="left:${l}px;width:${w}px;top:${top}px;background:${col}" data-tip="${t.n}|${fmt(t.s)} → ${fmt(t.e)} · ${t.ph} · ${p.product}">${inside?t.n:""}</div>`;
+    if(!inside){
+      const fitsRight = l+w+6+needW <= nWeeks*PXW;
+      html += fitsRight
+        ? `<div class="blab${past?" past":""}" data-n="${t.n}" style="left:${l+w+6}px;top:${top}px;color:${col}">${t.n}</div>`
+        : `<div class="blab${past?" past":""}" data-n="${t.n}" style="right:${nWeeks*PXW-l+6}px;top:${top}px;color:${col}">${t.n}</div>`;
+    }
+  });
+  html += `</div></div>`;
+  if(p.cuts){
+    const chip=r=>r.tt==="cut"?`<span class="ctag cut">${r.tag}</span>`:(r.tt==="held"?`<span class="ctag held">\u{1F512} ${r.tag||"Held"}</span>`:(r.tt==="kept"?`<span class="ctag held">${r.tag||"Kept"}</span>`:""));
+    let ct=`<div class="cutrow" data-product="${p.product}"><div class="cutwrap"><h4>${p.cutTitle||"Where the days come from"}</h4><table class="cuttable"><tr><th>Block</th><th>Baseline</th><th>Cut to</th><th>Saved</th><th>Lever</th></tr>`;
+    if(p.cutNet) ct+=`<tr class="cnet"><td>Net</td><td>${p.cutNet.base}</td><td>${p.cutNet.cut}</td><td>${p.cutNet.sv}</td><td>${p.cutNet.note}</td></tr>`;
+    p.cuts.forEach(r=>{ct+=`<tr${r.tt!=="cut"?' class="cdim"':''}><td>${r.b}</td><td>${r.base}</td><td>${r.cut}</td><td>${r.sv}</td><td>${chip(r)}${r.note||""}</td></tr>`;});
+    ct+=`</table>${p.cutFoot?`<div class="cutfoot">${p.cutFoot}</div>`:""}</div></div>`;
+    html += ct;
+  }
+});
+html += `</div>`;
+gw.innerHTML = html;
+gw.querySelectorAll(".gname").forEach(g=>{
+  const cr=g.closest(".grow").nextElementSibling;
+  if(!cr||!cr.classList.contains("cutrow"))return;
+  g.classList.add("hascuts");
+  g.addEventListener("click",e=>{
+    if(e.target.closest("a"))return;
+    cr.classList.toggle("open");
+    const c=g.querySelector(".caret"); if(c)c.textContent=cr.classList.contains("open")?"▾":"▸";
+  });
+});
+const head = gw.querySelector(".gheadcells");
+head.insertAdjacentHTML("beforeend",`<div class="todaytag" style="left:${px(TODAY)}px">TODAY</div>`);
+gw.scrollLeft = Math.max(px(TODAY)-260, 0);
+
+document.getElementById("legend").innerHTML = DATA.map(p=>
+  `<span><span class="sw" style="background:${COLORS[p.product]||'#8892A0'}"></span>${p.product}${p.owner?` <span style="color:var(--dim)">· ${p.owner}</span>`:""}</span>`).join("");
+
+const tip=document.getElementById("tip");
+gw.addEventListener("mousemove",e=>{
+  const b=e.target.closest(".bar");
+  if(!b){tip.style.display="none";return;}
+  const [t1,t2]=b.dataset.tip.split("|");
+  tip.innerHTML=`<div class="t1">${t1}</div><div class="t2">${t2}</div>`;
+  tip.style.display="block";
+  tip.style.left=Math.min(e.clientX+14, innerWidth-300)+"px";
+  tip.style.top=(e.clientY+14)+"px";
+});
+gw.addEventListener("mouseleave",()=>tip.style.display="none");
+
+// ---- weekly digest
+const weeks=[];
+for(let w=0;w<nWeeks;w++){
+  const ws=new Date(T0.getTime()+w*7*DAY), we=new Date(ws.getTime()+7*DAY);
+  const items=[];
+  DATA.forEach(p=>p.tasks.forEach(t=>{
+    if(new Date(t.s)<we && new Date(t.e)>ws) items.push({p,t,due:new Date(t.e)<=we});
+  }));
+  weeks.push({ws,we,items});
+}
+const nav=document.getElementById("weeknav"), tnav=document.getElementById("tasknav"), grid=document.getElementById("wkgrid"), sum=document.getElementById("wksum");
+const curIdx = weeks.findIndex(w=>TODAY>=w.ws&&TODAY<w.we);
+
+const FAMILIES={
+ sourcing:{label:"Sourcing & Validation",names:["Find Product","Test Product","Ship Product to Office","Finalise Assembler"]},
+ design:{label:"Product Design",names:["Product Design","Product Prototyping","Product Prototype Feedback"]},
+ pkg:{label:"Packaging",names:["Packaging Design","Packaging Prototyping","Packaging Prototype Feedback","Packaging Production"]},
+ contract:{label:"Contracts",names:["Contract with Product Supplier","Contract with Packaging Supplier"]},
+ bis:{label:"Legal / BIS",names:["Legal BIS/WPC"]},
+ prod:{label:"Production & Software",names:["Final Production","Software","Assembly"]},
+ ship:{label:"Shipping & Delivery",names:["International Shipping","Customs & Local Shipping","Last Mile to Warehouse"]}};
+const FAM_OF={}; Object.entries(FAMILIES).forEach(([k,f])=>f.names.forEach(n=>FAM_OF[n]=k));
+// fuzzy fallback so renamed/new task names still classify
+const famOf=n=>{
+  if(FAM_OF[n]) return FAM_OF[n];
+  const s=n.toLowerCase();
+  if(/find|test product|test model|get model|sample|assembler/.test(s)) return "sourcing";
+  if(/packag/.test(s)) return "pkg";
+  if(/design|prototyp|feedback/.test(s)) return "design";
+  if(/contract|payment/.test(s)) return "contract";
+  if(/legal|bis|wpc/.test(s)) return "bis";
+  if(/production|software|assembly/.test(s)) return "prod";
+  if(/shipping|customs|last mile/.test(s)) return "ship";
+  return "sourcing";
+};
+const handsOn=n=>HANDS_ON.has(n)||/find|test|design|prototyp|feedback|contract|last mile|payment/i.test(n);
+
+// team domains: Design = design/proto/feedback · Admin = payments/contracts/legal · Product = everything else
+const TEAMS={
+ product:{label:"Product team",people:"Yash · Naman"},
+ design:{label:"Design team",people:"Anurag · Aniket"},
+ admin:{label:"Admin",people:"Natasha · Siddhi"}};
+const teamOf=n=>{
+  const s=n.toLowerCase();
+  if(/design|prototyp|feedback/.test(s)) return "design";
+  if(/legal|bis|wpc|contract|payment/.test(s)) return "admin";
+  return "product";
+};
+
+let selWeek=Math.max(curIdx,0), selFam=null, selTeam=null, selProd=null;
+const match=n=>(!selFam||famOf(n)===selFam)&&(!selTeam||teamOf(n)===selTeam);
+const pOK=p=>!selProd||p.product===selProd;
+
+nav.innerHTML = `<button class="wpill" data-i="-1">All weeks<span class="cnt num"></span></button>`+
+  weeks.map((w,i)=>`<button class="wpill" data-i="${i}">${fmt(w.ws)}${i===curIdx?" · this week":""}<span class="cnt num"></span></button>`).join("");
+tnav.innerHTML = `<button class="wpill">All tasks</button>`+
+  Object.entries(FAMILIES).map(([k,f])=>`<button class="wpill" data-f="${k}">${f.label}<span class="cnt num"></span></button>`).join("");
+const gnav=document.getElementById("teamnav");
+gnav.innerHTML = `<button class="wpill">All teams</button>`+
+  Object.entries(TEAMS).map(([k,t])=>`<button class="wpill" data-t="${k}">${t.label}<span class="cnt num"></span><span class="ppl">${t.people}</span></button>`).join("");
+const pnav=document.getElementById("prodnav");
+pnav.innerHTML = `<button class="wpill">All products</button>`+
+  DATA.map(p=>`<button class="wpill" data-p="${p.product}"><span class="dotc" style="background:${COLORS[p.product]||'#8892A0'}"></span>${p.product}<span class="cnt num"></span></button>`).join("");
+
+nav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selWeek=+b.dataset.i;render();}});
+tnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selFam=b.dataset.f||null;render();}});
+gnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selTeam=b.dataset.t||null;render();}});
+pnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selProd=b.dataset.p||null;render();}});
+
+// collapsible panel — open by default so you pick, then collapse for the full view
+const ftog=document.getElementById("ftoggle");
+ftog.addEventListener("click",()=>{
+  document.body.classList.toggle("fopen");
+  ftog.textContent=document.body.classList.contains("fopen")?"✕ Collapse":"☰ Filters";
+});
+document.body.classList.add("fopen"); ftog.textContent="✕ Collapse";
+
+function render(){
+  pnav.querySelectorAll(".wpill").forEach(el=>{
+    const pr=el.dataset.p||null;
+    el.classList.toggle("active",pr===selProd);
+    if(pr){
+      const c = selWeek>=0 ? weeks[selWeek].items.filter(x=>x.p.product===pr&&match(x.t.n)).length
+                           : DATA.filter(p=>p.product===pr).reduce((a,p)=>a+p.tasks.filter(t=>match(t.n)).length,0);
+      el.querySelector(".cnt").textContent=c||"—";
+      el.style.opacity = c?"":".45";
+    }
+  });
+  gw.querySelectorAll("[data-product]").forEach(el=>{
+    const show = !selProd || el.dataset.product===selProd;
+    el.style.display = show ? "" : "none";
+  });
+  nav.querySelectorAll(".wpill").forEach(el=>{
+    const i=+el.dataset.i;
+    el.classList.toggle("active",i===selWeek);
+    const c = i<0 ? DATA.filter(pOK).reduce((a,p)=>a+p.tasks.filter(t=>match(t.n)).length,0)
+                  : weeks[i].items.filter(x=>pOK(x.p)&&match(x.t.n)).length;
+    el.querySelector(".cnt").textContent = c||"—";
+    el.style.opacity = c?"":".45";
+  });
+  tnav.querySelectorAll(".wpill").forEach(el=>{
+    const f=el.dataset.f||null;
+    el.classList.toggle("active",f===selFam);
+    if(f){
+      const tm=t=>!selTeam||teamOf(t)===selTeam;
+      const c = selWeek>=0 ? weeks[selWeek].items.filter(x=>pOK(x.p)&&famOf(x.t.n)===f&&tm(x.t.n)).length
+                           : DATA.filter(pOK).reduce((a,p)=>a+p.tasks.filter(t=>famOf(t.n)===f&&tm(t.n)).length,0);
+      el.querySelector(".cnt").textContent=c||"—";
+      el.style.opacity = c?"":".45";
+    }
+  });
+  gnav.querySelectorAll(".wpill").forEach(el=>{
+    const t=el.dataset.t||null;
+    el.classList.toggle("active",t===selTeam);
+    if(t){
+      const fm=x=>!selFam||famOf(x)===selFam;
+      const c = selWeek>=0 ? weeks[selWeek].items.filter(x=>pOK(x.p)&&teamOf(x.t.n)===t&&fm(x.t.n)).length
+                           : DATA.filter(pOK).reduce((a,p)=>a+p.tasks.filter(k=>teamOf(k.n)===t&&fm(k.n)).length,0);
+      el.querySelector(".cnt").textContent=c||"—";
+      el.style.opacity = c?"":".45";
+    }
+  });
+  gw.querySelectorAll(".bar,.blab").forEach(el=>el.classList.toggle("dimmed",
+    (!!selFam && famOf(el.dataset.n)!==selFam) || (!!selTeam && teamOf(el.dataset.n)!==selTeam)));
+  let items, scope;
+  if(selWeek>=0){
+    const wk=weeks[selWeek];
+    items=wk.items.filter(x=>pOK(x.p)&&match(x.t.n));
+    scope=`week of <b class="num">${fmt(wk.ws)}</b>`;
+  }else{
+    items=[];
+    DATA.filter(pOK).forEach(p=>p.tasks.forEach(t=>{if(match(t.n))items.push({p,t,due:false});}));
+    scope="the <b>full timeline</b>";
+  }
+  const famTxt=(selFam?` · showing only <b>${FAMILIES[selFam].label}</b>`:"")+(selTeam?` · <b>${TEAMS[selTeam].label}</b> (${TEAMS[selTeam].people})`:"")+(selProd?` · product: <b>${selProd}</b>`:"");
+  if(!items.length){
+    sum.innerHTML=`Nothing in ${scope}${famTxt}.`;
+    grid.innerHTML=`<div class="empty">No matching tasks — pick another week or task type.</div>`;
+    return;
+  }
+  const hands=items.filter(x=>handsOn(x.t.n)).length;
+  const prods=new Set(items.map(x=>x.p.product));
+  sum.innerHTML=`<b>${prods.size} products</b> · <b>${items.length} tasks</b> (${hands} hands-on, ${items.length-hands} follow-up) in ${scope}${famTxt}. `+
+    (selWeek>=0 ? (hands>8?`<b style="color:var(--bad)">That's an overloaded week</b> — hands-on work above ~8 slots means things will slip.`:
+                   hands>=5?`<b style="color:var(--tight)">Heavy but doable</b> if follow-ups are batched.`:`Comfortable load.`) : "");
+  const byP=new Map();
+  items.forEach(x=>{if(!byP.has(x.p.product))byP.set(x.p.product,{p:x.p,list:[]});byP.get(x.p.product).list.push(x);});
+  grid.innerHTML=[...byP.values()].map(({p,list})=>{
+    list.sort((a,b)=>new Date(a.t.s)-new Date(b.t.s));
+    return `<div class="pcard" style="border-top-color:${COLORS[p.product]||'#8892A0'}">
+      <h3><span>${p.product}</span><span class="chip ${p.status}">${p.status.replace("_"," ")}</span></h3>
+      ${(p.ownerP||p.ownerD)?`<div class="own">${[p.ownerP?"Product · "+p.ownerP:"",p.ownerD?"Design · "+p.ownerD:""].filter(Boolean).join(" &nbsp;|&nbsp; ")}</div>`:(p.owner?`<div class="own">Owner · ${p.owner}</div>`:"")}
+      ${list.map(x=>`<div class="titem">
+        <span class="tag ${x.due?"due":handsOn(x.t.n)?"act":"wait"}">${x.due?"due":handsOn(x.t.n)?"hands-on":"follow-up"}</span>
+        <span class="tn">${x.t.n}</span><span class="td num">${fmt(x.t.s)}–${fmt(x.t.e)}</span>
+      </div>`).join("")}
+    </div>`;
+  }).join("");
+}
+render();
+</script>
