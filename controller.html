@@ -105,18 +105,21 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <div class="tblwrap"><table>
 <thead><tr><th>Block</th><th>Baseline</th><th>Cut to</th><th>Saved</th><th>Lever</th></tr></thead>
 <tbody>
-<tr class="net"><td>Net</td><td>Nov 10</td><td>Oct 7</td><td class="sv">−34</td><td>November → October</td></tr>
+<tr class="net"><td>Net</td><td>Nov 17</td><td>Oct 7</td><td class="sv">−41</td><td>November → October</td></tr>
 <tr><td>Prototyping</td><td>2× · 42d</td><td>1× · 21d</td><td class="sv">−21</td><td><span class="tag lever">Drop 2nd attempt</span> 3 wk each</td></tr>
+<tr><td>Get models (from China)</td><td>14d</td><td>7d</td><td class="sv">−7</td><td><span class="tag lever">Expedite</span> express courier — funds the design week</td></tr>
 <tr><td>International shipping</td><td>11d sea</td><td>5d air</td><td class="sv">−6</td><td><span class="tag lever">Sea → Air</span></td></tr>
 <tr><td>Contract (our-end)</td><td>7d</td><td>3d</td><td class="sv">−4</td><td><span class="tag lever">Internal</span> template + pre-agreed</td></tr>
 <tr><td>Testing/feedback</td><td>3d</td><td>1d</td><td class="sv">−2</td><td><span class="tag lever">Internal</span> same-day sign-off</td></tr>
 <tr><td>Last mile (our-end)</td><td>3d</td><td>2d</td><td class="sv">−1</td><td><span class="tag lever">Internal</span> direct to WH</td></tr>
+<tr><td>Product design</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Held</span> added 13 Jul, full week kept</td></tr>
 <tr><td>Customs</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Held</span> statutory</td></tr>
 <tr><td>Final production</td><td>28d</td><td>28d</td><td>0</td><td><span class="tag held">🔒 Held</span> never crashed</td></tr>
 <tr><td>Software</td><td>14d parallel</td><td>14d parallel</td><td>0</td><td><span class="tag held">—</span> off critical path</td></tr>
 </tbody>
 </table></div>
 <p class="ship">Ships <b>28 Sep (air)</b> — NOT co-booked with adapter/cable (13 Sep): proto starts Aug 1 and production is never cut, so holding the 13 Sep departure is impossible; separate booking is the only way to keep October.</p>
+<p class="ship">Product Design week (25 Jul – 1 Aug) added after Test Models; funded by expediting Get Models — <b>models must land by 18 Jul</b> (express courier now).</p>
 </div>
 </div>
 <script>
@@ -127,8 +130,9 @@ function ad(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function fmt(d){return d.getDate()+' '+MON[d.getMonth()];}
 var COL={Design:'#EF9F27',Commitment:'#7F77DD',Manufacturing:'#378ADD',Logistics:'#639922',Buffer:'#8a8980',Launch:'#E24B4A'};
 var T=[
- {n:'Get models from China',ph:'Sourcing',s:0,e:14/7,team:'product',du:'14d',sp:1},
- {n:'Test models',ph:'Sourcing',s:14/7,e:21/7,team:'product',du:'7d',sp:1},
+ {n:'Get models from China (express)',ph:'Sourcing',s:0,e:7/7,team:'product',du:'7d',sp:1},
+ {n:'Test models',ph:'Sourcing',s:7/7,e:14/7,team:'product',du:'7d',sp:1},
+ {n:'Product design',ph:'Design',s:14/7,e:21/7,team:'design',du:'7d'},
  {n:'Product prototyping (1×)',ph:'Design',s:21/7,e:42/7,team:'design',du:'21d'},
  {n:'Testing & feedback',ph:'Design',s:42/7,e:43/7,team:'design',du:'1d'},
  {n:'BIS + WPC',ph:'Commitment',s:4/7,e:46/7,team:'product',du:'42d'},
@@ -170,7 +174,7 @@ function render(){
  thead.innerHTML=hh;
  var wkEl=document.getElementById('wk');
  if(wk!=='all'){ wkEl.style.display='block'; wkEl.style.left=(wk*WPX)+'px'; wkEl.style.top='46px'; wkEl.style.height=(vis.length*28)+'px'; }
- if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (get models from China 14d, test 7d) · proto starts <b>1 Aug</b> (1 attempt) → last mile ends <b>7 Oct</b> = 1st week of October → <b>October launch</b> (milestone 17 Oct after 1.5w buffer). CBU · air, ships 28 Sep — separate booking. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
+ if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (get models from China 7d express → test 7d → product design 7d) · proto starts <b>1 Aug</b> (1 attempt) → last mile ends <b>7 Oct</b> = 1st week of October → <b>October launch</b> (milestone 17 Oct after 1.5w buffer). CBU · air, ships 28 Sep — separate booking. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
  else { var d0=ad(START,wk*7),d1=ad(START,(wk+1)*7); var act=vis.filter(function(t){return ov(t,wk);}).map(function(t){return t.n;});
    info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' – '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
 }
