@@ -74,10 +74,10 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <p class="sub">China / SKD / Logo + Colour / Sea · Week-based launch timeline · November 2026 plan · 1 prototype attempt · BIS + WPC · India assembly</p>
 <div class="meta">
 <div><div class="k">Start</div><div class="v">Sat 11 Jul 2026</div></div>
-<div><div class="k">Prototyping starts</div><div class="v">Sat 1 Aug 2026</div></div>
-<div><div class="k">Ship departure</div><div class="v">26 Sep (sea, separate booking)</div></div>
-<div><div class="k">Warehouse-ready</div><div class="v">26 Oct 2026</div></div>
-<div><div class="k">Launch</div><div class="v">November 2026 (6 Nov)</div></div>
+<div><div class="k">Prototyping starts</div><div class="v">Sat 8 Aug 2026</div></div>
+<div><div class="k">Ship departure</div><div class="v">3 Oct (sea, separate booking)</div></div>
+<div><div class="k">Warehouse-ready</div><div class="v">2 Nov 2026</div></div>
+<div><div class="k">Launch</div><div class="v">November 2026 (13 Nov)</div></div>
 </div>
 <div class="ctl"><span class="lab">Team</span>
 <button class="btn on" data-team="all">All</button>
@@ -105,7 +105,8 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <div class="tblwrap"><table>
 <thead><tr><th>Block</th><th>Baseline</th><th>Cut to</th><th>Saved</th><th>Lever</th></tr></thead>
 <tbody>
-<tr class="net"><td>Net</td><td>Nov 20</td><td>Oct 26</td><td class="sv">−25</td><td>December → November</td></tr>
+<tr class="net"><td>Net</td><td>Nov 27</td><td>Nov 2</td><td class="sv">−25</td><td>December → November</td></tr>
+<tr><td>Test products</td><td>14d</td><td>14d</td><td>0</td><td><span class="tag held">🔒 Held</span> extended to 2 wk per Yash</td></tr>
 <tr><td>Prototyping</td><td>2× · 42d</td><td>1× · 21d</td><td class="sv">−21</td><td><span class="tag lever">Drop 2nd attempt</span> 3 wk each</td></tr>
 <tr><td>Testing/feedback</td><td>3d</td><td>2d</td><td class="sv">−1</td><td><span class="tag lever">Internal</span> same-day sign-off</td></tr>
 <tr><td>Contract (our-end)</td><td>7d</td><td>5d</td><td class="sv">−2</td><td><span class="tag lever">Internal</span> template + pre-agreed</td></tr>
@@ -116,7 +117,7 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <tr><td>Final production</td><td>28d</td><td>28d</td><td>0</td><td><span class="tag held">🔒 Held</span> never crashed</td></tr>
 </tbody>
 </table></div>
-<p class="ship">Ships <b>26 Sep (sea)</b> — same MODE as the trio but NOT the 17 Oct date: SKD assembly adds 10d after customs, and holding the co-booked date (even on air, last mile Nov 10) pushes the launch to December. Separate earlier booking is the only way to keep November.</p>
+<p class="ship">Ships <b>3 Oct (sea)</b> — separate booking (SKD tail). 2-wk test products absorbed; November holds.</p>
 </div>
 </div>
 <script>
@@ -128,21 +129,21 @@ function fmt(d){return d.getDate()+' '+MON[d.getMonth()];}
 var COL={Design:'#EF9F27',Commitment:'#7F77DD',Manufacturing:'#378ADD',Logistics:'#639922',Buffer:'#8a8980',Launch:'#E24B4A'};
 var T=[
  {n:'Find suppliers',ph:'Sourcing',s:0,e:7/7,team:'product',du:'7d',sp:1},
- {n:'Test products',ph:'Sourcing',s:7/7,e:14/7,team:'product',du:'7d',sp:1},
- {n:'Ship samples to office',ph:'Sourcing',s:14/7,e:21/7,team:'product',du:'7d',sp:1},
- {n:'Product design',ph:'Design',s:11/7,e:21/7,team:'design',du:'10d'},
+ {n:'Test products',ph:'Sourcing',s:7/7,e:21/7,team:'product',du:'14d',sp:1},
+ {n:'Ship samples to office',ph:'Sourcing',s:21/7,e:28/7,team:'product',du:'7d',sp:1},
+ {n:'Product design',ph:'Design',s:18/7,e:28/7,team:'design',du:'10d'},
  {n:'Finalise assembler',ph:'Commitment',s:0,e:4/7,team:'product',du:'4d'},
  {n:'BIS + WPC',ph:'Commitment',s:4/7,e:46/7,team:'product',du:'42d'},
- {n:'Product prototyping (1×)',ph:'Design',s:21/7,e:42/7,team:'design',du:'21d'},
- {n:'Testing & feedback',ph:'Design',s:42/7,e:44/7,team:'design',du:'2d'},
- {n:'Contract – product',ph:'Manufacturing',s:44/7,e:49/7,team:'product',du:'5d'},
- {n:'Final production',ph:'Manufacturing',s:49/7,e:77/7,team:'product',du:'28d'},
- {n:'Intl shipping (sea)',ph:'Logistics',s:77/7,e:88/7,team:'product',du:'11d'},
- {n:'Customs + WPC clear',ph:'Logistics',s:88/7,e:95/7,team:'product',du:'7d'},
- {n:'Assembly – India (SKD)',ph:'Logistics',s:95/7,e:105/7,team:'product',du:'10d'},
- {n:'Last mile',ph:'Logistics',s:105/7,e:107/7,team:'product',du:'2d'},
- {n:'Buffer',ph:'Buffer',s:107/7,e:117.5/7,team:'product',du:'1.5w'},
- {n:'Launch (November)',ph:'Launch',s:118/7,e:118/7,team:'product',du:'6 Nov',mile:1}
+ {n:'Product prototyping (1×)',ph:'Design',s:28/7,e:49/7,team:'design',du:'21d'},
+ {n:'Testing & feedback',ph:'Design',s:49/7,e:51/7,team:'design',du:'2d'},
+ {n:'Contract – product',ph:'Manufacturing',s:51/7,e:56/7,team:'product',du:'5d'},
+ {n:'Final production',ph:'Manufacturing',s:56/7,e:84/7,team:'product',du:'28d'},
+ {n:'Intl shipping (sea)',ph:'Logistics',s:84/7,e:95/7,team:'product',du:'11d'},
+ {n:'Customs + WPC clear',ph:'Logistics',s:95/7,e:102/7,team:'product',du:'7d'},
+ {n:'Assembly – India (SKD)',ph:'Logistics',s:102/7,e:112/7,team:'product',du:'10d'},
+ {n:'Last mile',ph:'Logistics',s:112/7,e:114/7,team:'product',du:'2d'},
+ {n:'Buffer',ph:'Buffer',s:114/7,e:124.5/7,team:'product',du:'1.5w'},
+ {n:'Launch (November)',ph:'Launch',s:125/7,e:125/7,team:'product',du:'13 Nov',mile:1}
 ];
 var team='all',wk='all';
 function ov(t,i){ if(t.mile) return t.s>=i && t.s<i+1; return t.s<i+1 && t.e>i; }
@@ -161,7 +162,7 @@ function render(){
  vis.forEach(function(t){
    var dim=(wk!=='all'&&!ov(t,wk))?' dim':'';
    var inner='';
-   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 6 Nov 2026 (November)"></div>'; }
+   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 13 Nov 2026 (November)"></div>'; }
    else { var c=t.sp?'transparent':COL[t.ph]; var bd=t.sp?';border:2.5px solid var(--ts)':'';
      inner='<div class="bar" style="left:'+(t.s*WPX)+'px;width:'+((t.e-t.s)*WPX)+'px;background:'+c+bd+'" title="'+fmt(ad(START,t.s*7))+' – '+fmt(ad(START,t.e*7))+'"></div>'; }
    th+='<div class="trow'+dim+'">'+inner+'</div>';
@@ -173,7 +174,7 @@ function render(){
  thead.innerHTML=hh;
  var wkEl=document.getElementById('wk');
  if(wk!=='all'){ wkEl.style.display='block'; wkEl.style.left=(wk*WPX)+'px'; wkEl.style.top='46px'; wkEl.style.height=(vis.length*28)+'px'; }
- if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers 7d → test products 7d → air samples 7d; design runs parallel 22 Jul–1 Aug) · proto starts <b>1 Aug</b> (1 attempt) → last mile ends <b>26 Oct</b> (late Oct, past the 1st week) → <b>November launch</b> (milestone 6 Nov after 1.5w buffer). SKD · sea, ships 26 Sep — separate booking. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
+ if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers 7d → test products 14d → air samples 7d; design runs parallel 29 Jul–8 Aug) · proto starts <b>8 Aug</b> (1 attempt) → last mile ends <b>2 Nov</b> = 1st week of November → <b>November launch</b> (milestone 13 Nov after 1.5w buffer). SKD · sea, ships 3 Oct — separate booking. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
  else { var d0=ad(START,wk*7),d1=ad(START,(wk+1)*7); var act=vis.filter(function(t){return ov(t,wk);}).map(function(t){return t.n;});
    info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' – '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
 }

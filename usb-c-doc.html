@@ -63,7 +63,7 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <div class="meta">
 <div><div class="k">Start</div><div class="v">Sat 11 Jul 2026</div></div>
 <div><div class="k">Prototyping starts</div><div class="v">Sat 1 Aug 2026</div></div>
-<div><div class="k">Ship departure</div><div class="v">17 Oct (sea, co-booked)</div></div>
+<div><div class="k">Ship departure</div><div class="v">17 Oct (sea, solo booking)</div></div>
 <div><div class="k">Warehouse-ready</div><div class="v">6 Nov 2026</div></div>
 <div><div class="k">Launch</div><div class="v">November 2026 (16 Nov)</div></div>
 </div>
@@ -97,12 +97,12 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <tr><td>Testing/feedback</td><td>3d</td><td>2d</td><td class="sv">−1</td><td><span class="tag lever">Internal</span> same-day sign-off</td></tr>
 <tr><td>Contract (our-end)</td><td>7d</td><td>5d</td><td class="sv">−2</td><td><span class="tag lever">Internal</span> template + pre-agreed</td></tr>
 <tr><td>Last mile (our-end)</td><td>3d</td><td>2d</td><td class="sv">−1</td><td><span class="tag lever">Internal</span> direct to WH</td></tr>
-<tr><td>Sea shipping</td><td>11d</td><td>11d</td><td>0</td><td><span class="tag held">🔒 Held</span> sea kept — co-booked 17 Oct</td></tr>
+<tr><td>Sea shipping</td><td>11d</td><td>11d</td><td>0</td><td><span class="tag held">🔒 Held</span> sea kept — ships 17 Oct solo</td></tr>
 <tr><td>Customs</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Held</span> statutory</td></tr>
 <tr><td>Final production</td><td>28d</td><td>28d</td><td>0</td><td><span class="tag held">🔒 Held</span> never crashed</td></tr>
 </tbody>
 </table></div>
-<p class="ship">Ships <b>17 Oct (sea)</b> — co-booked with <b>wireless mouse</b> and <b>wired headphones</b> (same date, same mode).</p>
+<p class="ship">Ships <b>17 Oct (sea)</b> — solo booking; mouse + headphones moved to 24 Oct air.</p>
 </div>
 </div>
 <script>
@@ -156,7 +156,7 @@ function render(){
  thead.innerHTML=hh;
  var wkEl=document.getElementById('wk');
  if(wk!=='all'){ wkEl.style.display='block'; wkEl.style.left=(wk*WPX)+'px'; wkEl.style.top='46px'; wkEl.style.height=(vis.length*28)+'px'; }
- if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers 7d → test products 7d → air samples 7d; design runs parallel 22 Jul–1 Aug) · proto starts <b>1 Aug</b> (2 attempts kept) → last mile ends <b>6 Nov</b> = 1st week of November → <b>November launch</b> (milestone 16 Nov after 1.5w buffer). CBU · sea, ships 17 Oct co-booked. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
+ if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers 7d → test products 7d → air samples 7d; design runs parallel 22 Jul–1 Aug) · proto starts <b>1 Aug</b> (2 attempts kept) → last mile ends <b>6 Nov</b> = 1st week of November → <b>November launch</b> (milestone 16 Nov after 1.5w buffer). CBU · sea, ships 17 Oct — solo booking. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
  else { var d0=ad(START,wk*7),d1=ad(START,(wk+1)*7); var act=vis.filter(function(t){return ov(t,wk);}).map(function(t){return t.n;});
    info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' – '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
 }
