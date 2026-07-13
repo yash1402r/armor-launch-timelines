@@ -23,9 +23,9 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 .info{font-size:12.5px;color:var(--ts);margin:8px 0 14px;line-height:1.55;min-height:36px}
 .info b{color:var(--tp);font-weight:600}
 .wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--s2)}
-.gantt{display:flex;min-width:938px;position:relative}
+.gantt{display:flex;min-width:870px;position:relative}
 .labels{position:sticky;left:0;z-index:3;background:var(--s1);flex:0 0 190px;border-right:1px solid var(--bd)}
-.tracks{position:relative;flex:0 0 748px}
+.tracks{position:relative;flex:0 0 680px}
 .hd{height:46px;display:flex;align-items:center;padding:0 12px;font-weight:600;font-size:12px;color:var(--ts)}
 .lbl{height:28px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:8px;padding:0 12px}
 .lbl .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -61,10 +61,10 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <h1>USB-C Microphone</h1>
 <p class="sub">China / CBU / Logo / Sea · Week-based launch timeline · December 2026 plan · fully standard path, zero cuts · BIS (to confirm — wired USB mic may escape)</p>
 <div class="meta">
-<div><div class="k">Start</div><div class="v">Sat 11 Jul 2026</div></div>
-<div><div class="k">Prototyping starts</div><div class="v">Sat 1 Aug 2026</div></div>
-<div><div class="k">Ship departure</div><div class="v">20 Oct (sea, co-booked)</div></div>
-<div><div class="k">Warehouse-ready</div><div class="v">10 Nov 2026</div></div>
+<div><div class="k">Start</div><div class="v">Mon 20 Jul 2026</div></div>
+<div><div class="k">Prototyping starts</div><div class="v">Mon 10 Aug 2026</div></div>
+<div><div class="k">Ship departure</div><div class="v">29 Oct (sea, co-booked)</div></div>
+<div><div class="k">Warehouse-ready</div><div class="v">19 Nov 2026</div></div>
 <div><div class="k">Launch</div><div class="v">December 2026 (1 Dec, rolled)</div></div>
 </div>
 <div class="ctl"><span class="lab">Team</span>
@@ -93,23 +93,23 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <div class="tblwrap"><table>
 <thead><tr><th>Block</th><th>Baseline</th><th>Cut to</th><th>Saved</th><th>Lever</th></tr></thead>
 <tbody>
-<tr class="net"><td>Net</td><td>Nov 10</td><td>Nov 10</td><td class="sv">0</td><td>December fits with 27d start-slack in hand</td></tr>
+<tr class="net"><td>Net</td><td>Nov 19</td><td>Nov 19</td><td class="sv">0</td><td>December fits — start pushed to 20 Jul, 18d start-slack left</td></tr>
 <tr><td>Prototyping</td><td>2× · 42d</td><td>2× · 42d</td><td>0</td><td><span class="tag held">🔒 Kept</span> both attempts — no cut needed</td></tr>
 <tr><td>Testing/feedback</td><td>3d</td><td>3d</td><td>0</td><td><span class="tag held">🔒 Kept</span> standard</td></tr>
 <tr><td>Contract</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Kept</span> standard</td></tr>
-<tr><td>Sea shipping</td><td>11d</td><td>11d</td><td>0</td><td><span class="tag held">🔒 Held</span> sea kept — co-booked 20 Oct</td></tr>
+<tr><td>Sea shipping</td><td>11d</td><td>11d</td><td>0</td><td><span class="tag held">🔒 Held</span> sea kept — co-booked 29 Oct</td></tr>
 <tr><td>Customs</td><td>7d</td><td>7d</td><td>0</td><td><span class="tag held">🔒 Held</span> statutory</td></tr>
 <tr><td>Final production</td><td>28d</td><td>28d</td><td>0</td><td><span class="tag held">🔒 Held</span> never crashed</td></tr>
 <tr><td>Last mile</td><td>3d</td><td>3d</td><td>0</td><td><span class="tag held">🔒 Kept</span> standard</td></tr>
 </tbody>
 </table></div>
-<p class="ship">Ships <b>20 Oct (sea)</b> — co-booked with <b>webcam</b> (same date, same mode). Could join the 17 Oct trio booking, but that pulls last mile to Nov 7 (1st week) → November; December launch keeps the 20 Oct pairing.</p>
-<p class="ship">Start slack: proto can start as late as <b>28 Aug</b> (sourcing kickoff by 7 Aug) and still make December — <b>27 days</b> of buffer on the start date.</p>
+<p class="ship">Ships <b>29 Oct (sea)</b> — co-booked with <b>webcam</b> (same date, same mode).</p>
+<p class="ship">Start slack: proto can start as late as <b>28 Aug</b> and still make December — <b>18 days</b> of buffer left after the one-week push.</p>
 </div>
 </div>
 <script>
 (function(){
-var START=new Date(2026,6,11),WPX=34,NW=22;
+var START=new Date(2026,6,20),WPX=34,NW=20;
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function ad(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function fmt(d){return d.getDate()+' '+MON[d.getMonth()];}
@@ -128,7 +128,7 @@ var T=[
  {n:'Customs & local',ph:'Logistics',s:112/7,e:119/7,team:'product',du:'7d'},
  {n:'Last mile',ph:'Logistics',s:119/7,e:122/7,team:'product',du:'3d'},
  {n:'Buffer',ph:'Buffer',s:122/7,e:132.5/7,team:'product',du:'1.5w'},
- {n:'Launch (rolled)',ph:'Launch',s:143/7,e:143/7,team:'product',du:'1 Dec',mile:1}
+ {n:'Launch (rolled)',ph:'Launch',s:134/7,e:134/7,team:'product',du:'1 Dec',mile:1}
 ];
 var team='all',wk='all';
 function ov(t,i){ if(t.mile) return t.s>=i && t.s<i+1; return t.s<i+1 && t.e>i; }
@@ -147,7 +147,7 @@ function render(){
  vis.forEach(function(t){
    var dim=(wk!=='all'&&!ov(t,wk))?' dim':'';
    var inner='';
-   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 1 Dec 2026 (rolled from 21 Nov)"></div>'; }
+   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 1 Dec 2026 (rolled from 30 Nov)"></div>'; }
    else { var c=t.sp?'transparent':COL[t.ph]; var bd=t.sp?';border:2.5px solid var(--ts)':'';
      inner='<div class="bar" style="left:'+(t.s*WPX)+'px;width:'+((t.e-t.s)*WPX)+'px;background:'+c+bd+'" title="'+fmt(ad(START,t.s*7))+' – '+fmt(ad(START,t.e*7))+'"></div>'; }
    th+='<div class="trow'+dim+'">'+inner+'</div>';
@@ -159,7 +159,7 @@ function render(){
  thead.innerHTML=hh;
  var wkEl=document.getElementById('wk');
  if(wk!=='all'){ wkEl.style.display='block'; wkEl.style.left=(wk*WPX)+'px'; wkEl.style.top='46px'; wkEl.style.height=(vis.length*28)+'px'; }
- if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers 7d → test products 7d → air samples 7d; design runs parallel 22 Jul–1 Aug) · proto starts <b>1 Aug</b> (2 attempts kept) → last mile ends <b>10 Nov</b> (past the Nov 1st week) → buffer ends 21 Nov → after the 20th, so <b>launch rolls to 1 Dec 2026 (December)</b>. CBU · sea, ships 20 Oct co-booked with webcam. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
+ if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Mon 20 Jul 2026 (find suppliers 7d → test products 7d → air samples 7d; design runs parallel 31 Jul–10 Aug) · proto starts <b>10 Aug</b> (2 attempts kept) → last mile ends <b>19 Nov</b> (past the Nov 1st week) → buffer ends 30 Nov → after the 20th, so <b>launch rolls to 1 Dec 2026 (December)</b>. CBU · sea, ships 29 Oct co-booked with webcam. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
  else { var d0=ad(START,wk*7),d1=ad(START,(wk+1)*7); var act=vis.filter(function(t){return ov(t,wk);}).map(function(t){return t.n;});
    info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' – '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
 }
