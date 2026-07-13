@@ -90,6 +90,9 @@
   #fpanel .weeknav{max-height:34vh;overflow-y:auto;}
   #fpanel .wpill{font-size:11px;padding:4px 10px;}
   .ppl{font-size:9.5px;color:var(--dim);display:block;margin-top:1px;}
+  #dinput{background:var(--panel);border:1px solid var(--line2);color:var(--text);font-size:11.5px;padding:4px 8px;border-radius:8px;width:100%;box-sizing:border-box;margin-bottom:6px;color-scheme:dark;}
+  #dinput:focus{outline:none;border-color:#5B9CF6;}
+  .drow{display:flex;gap:6px;}
   .pth{font-size:10px;color:var(--mut);line-height:1.3;}
   @media (max-width:900px){body.fopen header,body.fopen section{padding-left:28px;} #fpanel{box-shadow:0 0 40px #000c;}}
 
@@ -130,6 +133,10 @@
 
 <button id="ftoggle">☰ Filters</button>
 <div id="fpanel">
+  <div class="fgrp"><div class="navlbl lbl">Date — what's on that day</div>
+    <input type="date" id="dinput">
+    <div class="drow"><button class="wpill" id="dtoday">Today</button><button class="wpill" id="dclear">Clear</button></div>
+  </div>
   <div class="fgrp"><div class="navlbl lbl">Product</div><div class="weeknav" id="prodnav"></div></div>
   <div class="fgrp"><div class="navlbl lbl">Team</div><div class="weeknav" id="teamnav"></div></div>
   <div class="fgrp"><div class="navlbl lbl">Week</div><div class="weeknav" id="weeknav"></div></div>
@@ -165,7 +172,8 @@ const COLORS = {"Adapter":"#E879C9","Cable":"#94A3B8","Controller":"#F59E0B","Wi
 const HANDS_ON = new Set(["Find Product","Test Product","Finalise Assembler","Product Design","Product Prototype Feedback","Packaging Design","Packaging Prototype Feedback","Contract with Product Supplier","Contract with Packaging Supplier","Last Mile to Warehouse"]);
 
 const DAY = 864e5;
-const TODAY = new Date("2026-07-13");
+const BUILD_TODAY = new Date("2026-07-13");
+let TODAY = BUILD_TODAY;
 // derive grid bounds from the data (Monday padding on both ends)
 const _S = DATA.flatMap(p=>p.tasks.map(t=>+new Date(t.s)));
 const _E = DATA.flatMap(p=>p.tasks.map(t=>+new Date(t.e))).concat(DATA.map(p=>+new Date(p.launchDate)));
@@ -254,12 +262,12 @@ DATA.forEach(p=>{
     const top = BT+t.lane*LH;
     const needW = t.n.length*5.7+14;
     const inside = w >= needW;
-    html += `<div class="bar${t.ph==="Phase 1"?" ph1":""}${past?" past":""}" data-n="${t.n}" style="left:${l}px;width:${w}px;top:${top}px;background:${col}" data-tip="${t.n}|${fmt(t.s)} → ${fmt(t.e)} · ${t.ph} · ${p.product}">${inside?t.n:""}</div>`;
+    html += `<div class="bar${t.ph==="Phase 1"?" ph1":""}${past?" past":""}" data-n="${t.n}" data-e="${t.e}" style="left:${l}px;width:${w}px;top:${top}px;background:${col}" data-tip="${t.n}|${fmt(t.s)} → ${fmt(t.e)} · ${t.ph} · ${p.product}">${inside?t.n:""}</div>`;
     if(!inside){
       const fitsRight = l+w+6+needW <= nWeeks*PXW;
       html += fitsRight
-        ? `<div class="blab${past?" past":""}" data-n="${t.n}" style="left:${l+w+6}px;top:${top}px;color:${col}">${t.n}</div>`
-        : `<div class="blab${past?" past":""}" data-n="${t.n}" style="right:${nWeeks*PXW-l+6}px;top:${top}px;color:${col}">${t.n}</div>`;
+        ? `<div class="blab${past?" past":""}" data-n="${t.n}" data-e="${t.e}" style="left:${l+w+6}px;top:${top}px;color:${col}">${t.n}</div>`
+        : `<div class="blab${past?" past":""}" data-n="${t.n}" data-e="${t.e}" style="right:${nWeeks*PXW-l+6}px;top:${top}px;color:${col}">${t.n}</div>`;
     }
   });
   html += `</div></div>`;
@@ -372,6 +380,29 @@ tnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selFa
 gnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selTeam=b.dataset.t||null;render();}});
 pnav.addEventListener("click",e=>{const b=e.target.closest(".wpill");if(b){selProd=b.dataset.p||null;render();}});
 
+// ---- date entry: move the TODAY line + show that day's work
+let selDay=null;
+const din=document.getElementById("dinput");
+const iso=d=>d.toISOString().slice(0,10);
+function setDay(v){
+  selDay = v ? new Date(v+"T00:00:00") : null;
+  const d = selDay || BUILD_TODAY;
+  TODAY = d;
+  gw.querySelectorAll(".today").forEach(el=>el.style.left=px(d)+"px");
+  const tt=gw.querySelector(".todaytag");
+  if(tt){tt.style.left=px(d)+"px"; tt.textContent = selDay ? fmt(d).toUpperCase() : "TODAY";}
+  gw.querySelectorAll(".bar[data-e],.blab[data-e]").forEach(el=>el.classList.toggle("past", new Date(el.dataset.e) < d));
+  if(selDay){const i=weeks.findIndex(w=>d>=w.ws&&d<w.we); if(i>=0) selWeek=i;}
+  render();
+  if(selDay) gw.scrollLeft = Math.max(px(d)-260, 0);
+}
+din.addEventListener("change",()=>setDay(din.value||null));
+document.getElementById("dtoday").addEventListener("click",()=>{
+  const now=new Date(); now.setHours(0,0,0,0);
+  din.value=iso(now); setDay(din.value);
+});
+document.getElementById("dclear").addEventListener("click",()=>{din.value=""; setDay(null);});
+
 // collapsible panel — open by default so you pick, then collapse for the full view
 const ftog=document.getElementById("ftoggle");
 ftog.addEventListener("click",()=>{
@@ -428,7 +459,14 @@ function render(){
   gw.querySelectorAll(".bar,.blab").forEach(el=>el.classList.toggle("dimmed",
     (!!selFam && famOf(el.dataset.n)!==selFam) || (!!selTeam && teamOf(el.dataset.n)!==selTeam)));
   let items, scope;
-  if(selWeek>=0){
+  if(selDay){
+    items=[];
+    DATA.filter(pOK).forEach(p=>p.tasks.forEach(t=>{
+      if(match(t.n) && new Date(t.s)<=selDay && new Date(t.e)>selDay)
+        items.push({p,t,due:(new Date(t.e)-selDay)/DAY<=2});
+    }));
+    scope=`<b class="num">${fmt(selDay)}</b> — the day's line`;
+  }else if(selWeek>=0){
     const wk=weeks[selWeek];
     items=wk.items.filter(x=>pOK(x.p)&&match(x.t.n));
     scope=`week of <b class="num">${fmt(wk.ws)}</b>`;
