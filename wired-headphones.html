@@ -59,13 +59,13 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 </style>
 <div class="page">
 <h1>Wired Headphones</h1>
-<p class="sub">China / CBU / Logo / Air · Week-based launch timeline · November 2026 plan · 2 prototype attempts kept · no BIS/WPC (wired audio escapes)</p>
+<p class="sub">China / CBU / Logo / Air · Week-based launch timeline · December 2026 plan (+1 wk find suppliers) · 2 prototype attempts kept · no BIS/WPC (wired audio escapes)</p>
 <div class="meta">
 <div><div class="k">Start</div><div class="v">Sat 11 Jul 2026</div></div>
-<div><div class="k">Prototyping starts</div><div class="v">Sat 8 Aug 2026</div></div>
-<div><div class="k">Ship departure</div><div class="v">24 Oct (air, co-booked)</div></div>
-<div><div class="k">Warehouse-ready</div><div class="v">7 Nov 2026</div></div>
-<div><div class="k">Launch</div><div class="v">November 2026 (18 Nov)</div></div>
+<div><div class="k">Prototyping starts</div><div class="v">Sat 15 Aug 2026</div></div>
+<div><div class="k">Ship departure</div><div class="v">31 Oct (air, co-booked)</div></div>
+<div><div class="k">Warehouse-ready</div><div class="v">14 Nov 2026</div></div>
+<div><div class="k">Launch</div><div class="v">December 2026 (~1 Dec)</div></div>
 </div>
 <div class="ctl"><span class="lab">Team</span>
 <button class="btn on" data-team="all">All</button>
@@ -92,9 +92,10 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <div class="tblwrap"><table>
 <thead><tr><th>Block</th><th>Baseline</th><th>Cut to</th><th>Saved</th><th>Lever</th></tr></thead>
 <tbody>
-<tr class="net"><td>Net</td><td>Nov 17</td><td>Nov 7</td><td class="sv">−10</td><td>December → November</td></tr>
+<tr class="net"><td>Net</td><td>Nov 7</td><td>Nov 14</td><td class="sv">+7</td><td>November → December (+1 wk sourcing)</td></tr>
+<tr><td>Find suppliers</td><td>7d</td><td>14d</td><td class="sv">+7</td><td><span class="tag lever">+1 wk</span> sourcing per Yash — pushes whole chain</td></tr>
 <tr><td>Test products</td><td>14d</td><td>14d</td><td>0</td><td><span class="tag held">🔒 Held</span> extended to 2 wk per Yash</td></tr>
-<tr><td>Prototyping</td><td>2× · 42d</td><td>2× · 42d</td><td>0</td><td><span class="tag held">🔒 Kept</span> both attempts retained — cut not needed</td></tr>
+<tr><td>Prototyping</td><td>2× · 42d</td><td>2× · 42d</td><td>0</td><td><span class="tag held">🔒 Kept</span> both kept — drop 2nd (−21d) to pull back to Nov</td></tr>
 <tr><td>Testing/feedback</td><td>3d</td><td>2d</td><td class="sv">−1</td><td><span class="tag lever">Internal</span> same-day sign-off</td></tr>
 <tr><td>Contract (our-end)</td><td>7d</td><td>5d</td><td class="sv">−2</td><td><span class="tag lever">Internal</span> template + pre-agreed</td></tr>
 <tr><td>Last mile (our-end)</td><td>3d</td><td>2d</td><td class="sv">−1</td><td><span class="tag lever">Internal</span> direct to WH</td></tr>
@@ -103,7 +104,7 @@ h1{font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
 <tr><td>Final production</td><td>28d</td><td>28d</td><td>0</td><td><span class="tag held">🔒 Held</span> never crashed</td></tr>
 </tbody>
 </table></div>
-<p class="ship">Ships <b>24 Oct (air)</b> — co-booked with <b>wireless mouse</b> (same date, same mode). Sea would land Nov 13 → December, so air is forced. Hub dock ships separately (17 Oct sea).</p>
+<p class="ship">Ships <b>31 Oct (air)</b> — co-booked with <b>wireless mouse</b> (same date, same mode). +1 wk find-suppliers pushed warehouse to 14 Nov; +1.5w buffer lands launch ~25 Nov → rolls to December. Hub dock still ships 17 Oct sea.</p>
 </div>
 </div>
 <script>
@@ -114,19 +115,19 @@ function ad(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function fmt(d){return d.getDate()+' '+MON[d.getMonth()];}
 var COL={Design:'#EF9F27',Commitment:'#7F77DD',Manufacturing:'#378ADD',Logistics:'#639922',Buffer:'#8a8980',Launch:'#E24B4A'};
 var T=[
- {n:'Find suppliers',ph:'Sourcing',s:0,e:7/7,team:'product',du:'7d',sp:1},
- {n:'Test products',ph:'Sourcing',s:7/7,e:21/7,team:'product',du:'14d',sp:1},
- {n:'Ship samples to office',ph:'Sourcing',s:21/7,e:28/7,team:'product',du:'7d',sp:1},
+ {n:'Find suppliers (+1 wk)',ph:'Sourcing',s:0,e:14/7,team:'product',du:'14d',sp:1},
+ {n:'Test products',ph:'Sourcing',s:14/7,e:28/7,team:'product',du:'14d',sp:1},
+ {n:'Ship samples to office',ph:'Sourcing',s:28/7,e:35/7,team:'product',du:'7d',sp:1},
  {n:'Product design',ph:'Design',s:18/7,e:28/7,team:'design',du:'10d'},
- {n:'Product prototyping (2×)',ph:'Design',s:28/7,e:70/7,team:'design',du:'42d'},
- {n:'Testing & feedback',ph:'Design',s:70/7,e:72/7,team:'design',du:'2d'},
- {n:'Contract – product',ph:'Manufacturing',s:72/7,e:77/7,team:'product',du:'5d'},
- {n:'Final production',ph:'Manufacturing',s:77/7,e:105/7,team:'product',du:'28d'},
- {n:'Intl shipping (air)',ph:'Logistics',s:105/7,e:110/7,team:'product',du:'5d'},
- {n:'Customs & local',ph:'Logistics',s:110/7,e:117/7,team:'product',du:'7d'},
- {n:'Last mile',ph:'Logistics',s:117/7,e:119/7,team:'product',du:'2d'},
- {n:'Buffer',ph:'Buffer',s:119/7,e:129.5/7,team:'product',du:'1.5w'},
- {n:'Launch (November)',ph:'Launch',s:130/7,e:130/7,team:'product',du:'18 Nov',mile:1}
+ {n:'Product prototyping (2×)',ph:'Design',s:35/7,e:77/7,team:'design',du:'42d'},
+ {n:'Testing & feedback',ph:'Design',s:77/7,e:79/7,team:'design',du:'2d'},
+ {n:'Contract – product',ph:'Manufacturing',s:79/7,e:84/7,team:'product',du:'5d'},
+ {n:'Final production',ph:'Manufacturing',s:84/7,e:112/7,team:'product',du:'28d'},
+ {n:'Intl shipping (air)',ph:'Logistics',s:112/7,e:117/7,team:'product',du:'5d'},
+ {n:'Customs & local',ph:'Logistics',s:117/7,e:124/7,team:'product',du:'7d'},
+ {n:'Last mile',ph:'Logistics',s:124/7,e:126/7,team:'product',du:'2d'},
+ {n:'Buffer',ph:'Buffer',s:126/7,e:136.5/7,team:'product',du:'1.5w'},
+ {n:'Launch (December)',ph:'Launch',s:137/7,e:137/7,team:'product',du:'~1 Dec',mile:1}
 ];
 var team='all',wk='all';
 function ov(t,i){ if(t.mile) return t.s>=i && t.s<i+1; return t.s<i+1 && t.e>i; }
@@ -145,7 +146,7 @@ function render(){
  vis.forEach(function(t){
    var dim=(wk!=='all'&&!ov(t,wk))?' dim':'';
    var inner='';
-   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch 18 Nov 2026 (November)"></div>'; }
+   if(t.mile){ inner='<div class="mile" style="left:'+(t.s*WPX-6)+'px" title="Launch ~1 Dec 2026 (December - rolled past 20 Nov)"></div>'; }
    else { var c=t.sp?'transparent':COL[t.ph]; var bd=t.sp?';border:2.5px solid var(--ts)':'';
      inner='<div class="bar" style="left:'+(t.s*WPX)+'px;width:'+((t.e-t.s)*WPX)+'px;background:'+c+bd+'" title="'+fmt(ad(START,t.s*7))+' – '+fmt(ad(START,t.e*7))+'"></div>'; }
    th+='<div class="trow'+dim+'">'+inner+'</div>';
@@ -157,7 +158,7 @@ function render(){
  thead.innerHTML=hh;
  var wkEl=document.getElementById('wk');
  if(wk!=='all'){ wkEl.style.display='block'; wkEl.style.left=(wk*WPX)+'px'; wkEl.style.top='46px'; wkEl.style.height=(vis.length*28)+'px'; }
- if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers 7d → test products 14d → air samples 7d; design runs parallel 29 Jul–8 Aug) · proto starts <b>8 Aug</b> (2 attempts kept) → last mile ends <b>7 Nov</b> = 1st week of November → <b>November launch</b> (milestone 18 Nov after 1.5w buffer). CBU · wired · air, ships 24 Oct co-booked. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
+ if(wk==='all'){ info.innerHTML='<b>All weeks</b> · start Sat 11 Jul 2026 (find suppliers now <b>14d (+1 wk)</b> → test products 14d → air samples 7d; design parallel 29 Jul–8 Aug) · proto starts <b>15 Aug</b> (2 attempts kept) → last mile ends <b>14 Nov</b> → +1.5w buffer lands launch ~25 Nov, past the 20th → <b>rolls to December</b>. CBU · wired · air, ships 31 Oct co-booked with mouse. Lever: drop 2nd proto attempt (−21d) to pull back to Nov. '+(team==='all'?'Showing both teams.':'Filtered to <b>'+team+' team</b>.'); }
  else { var d0=ad(START,wk*7),d1=ad(START,(wk+1)*7); var act=vis.filter(function(t){return ov(t,wk);}).map(function(t){return t.n;});
    info.innerHTML='<b>Week '+(wk+1)+'</b> · '+fmt(d0)+' – '+fmt(d1)+' &nbsp;|&nbsp; Active: '+(act.length?act.join(', '):'—'); }
 }
